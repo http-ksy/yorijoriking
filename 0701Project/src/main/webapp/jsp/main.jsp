@@ -15,7 +15,7 @@
     <!-- font icons -->
     <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + JoeBLog main styles -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="../assets/css/joeblog.css">
 	<link rel="stylesheet" href="../fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../css/templatemo-style.css">
@@ -26,10 +26,10 @@
 <jsp:include page="${main_jsp }"></jsp:include>
 <jsp:include page="footer.jsp"></jsp:include>
 
- 
+ <!-- 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+ -->
 <!-- core  -->
     <script src="../assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="../assets/vendors/bootstrap/bootstrap.bundle.js"></script>
