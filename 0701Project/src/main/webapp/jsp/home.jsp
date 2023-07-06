@@ -9,42 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	
-  <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    Indicators
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
 
-    Wrapper for slides
-    <div class="carousel-inner">
-      <div class="item active">
-        <img src="../assets/imgs/food.jpg" alt="Los Angeles" style="width:100%; border-radius:10px">
-      </div>
-
-      <div class="item">
-        <img src="../assets/imgs/house.jpg" alt="Chicago" style="width:100%;">
-      </div>
-    
-      <div class="item">
-        <img src="../assets/imgs/kitchen.jpg" alt="New york" style="width:100%;">
-      </div>
-    </div>
-
-    Left and right controls
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div> -->
-  <div class="container">
+  <div class="container" style="margin-top:7px; border-radius:15px;">
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -53,10 +19,10 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="../assets/imgs/img-1.jpg" alt="First slide" style="height: 350px">
+      <img class="d-block w-100" src="../assets/imgs/t2.jpg" alt="First slide" style="height: 350px">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../assets/imgs/img-1.jpg" alt="Second slide" style="height: 350px">
+      <img class="d-block w-100" src="../assets/imgs/t1.jpg" alt="Second slide" style="height: 350px">
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="../assets/imgs/img-1.jpg" alt="Third slide" style="height: 350px">
@@ -115,7 +81,7 @@
               	  <a href="#">
                     <img src="${flist.poster }" alt="Image" class="img-fluid rounded" style="width:250px; height:150px; border-radius:20px;">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                         <h2>
+                         <h2 style="font-size:20pt;">
                         <c:if test="${flist.title.length()>10 }">
                           	 ${flist.title.substring(0,10) }
                           </c:if>
@@ -126,7 +92,7 @@
                         </h2>
                        
                     </figcaption>   
-                     e</a>                 
+                     </a>                 
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                 	<span>${flist.score }</span> 	 
@@ -169,7 +135,7 @@
               	  <a href="../list/recipeDetail.do?rdno=${rlist.rdno }">
                     <img src="${rlist.poster }" alt="Image" class="img-fluid rounded" style="width:250px; height:150px; border-radius:20px;">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                         <h2>
+                         <h2 style="font-size:20pt;">
                         <c:if test="${rlist.title.length()>10 }">
                           	 ${rlist.title.substring(0,10) }
                           </c:if>
@@ -226,7 +192,7 @@
               	  <a href="#">
                     <img src="${plist.poster }" alt="Image" class="img-fluid rounded" style="width:250px; height:150px; border-radius:20px;">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                         <h2>
+                        <h2 style="font-size:20pt;">
                         <c:if test="${plist.title.length()>10 }">
                           	 ${plist.title.substring(0,10) }
                           </c:if>
@@ -237,7 +203,7 @@
                         </h2>
                        
                     </figcaption>   
-                     e</a>                 
+                     </a>                 
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                 	<span>${plist.score }</span> 	 
@@ -280,7 +246,7 @@
               	  <a href="../share/shareDetail.do?skdno=${slist.skdno }">
                     <img src="${slist.poster }" alt="Image" class="img-fluid rounded" style="width:250px; height:150px; border-radius:20px;">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                         <h2>
+                         <h2 style="font-size:20pt;">
                         <c:if test="${slist.title.length()>10 }">
                           	 ${slist.title.substring(0,10) }
                           </c:if>
@@ -291,7 +257,7 @@
                         </h2>
                        
                     </figcaption>   
-                     e</a>                 
+                     </a>                 
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                 	<span>${slist.max_mem }</span> 	 

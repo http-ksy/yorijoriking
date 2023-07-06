@@ -162,9 +162,10 @@ sup {
 }
 
 a {
-  color: #c2f6ea;
+  color: #9CCC65;
   text-decoration: none;
   background-color: transparent;
+  font-weight:bold;
 }
 
 a:hover {
@@ -2941,15 +2942,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-danger {
-  color: #212529;
-  background-color: #f9948d;
-  border-color: #f9948d;
+  color: #fff;
+  background-color: ##0B4C5F;
+
 }
 
 .btn-danger:hover {
   color: #212529;
-  background-color: #f77269;
-  border-color: #f6675d;
+  background-color: #0B4C5F;
+  border-color: #fff;
 }
 
 .btn-danger:focus, .btn-danger.focus {
@@ -3010,7 +3011,7 @@ fieldset:disabled a.btn {
 
 .btn-dark {
   color: #fff;
-  background-color: #343a40;
+  background-color: ##0B4C5F;
   border-color: #343a40;
 }
 

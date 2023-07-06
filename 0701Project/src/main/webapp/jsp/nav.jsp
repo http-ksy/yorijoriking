@@ -87,7 +87,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   	      <a class="dropdown-item" href="#">공지사항</a>
-                            <a class="dropdown-item" href="#">자유게시판</a>
+                            <a class="dropdown-item" href="../board/list.do">자유게시판</a>
                             <a class="dropdown-item" href="#">묻고 답하기</a>
                             <!-- <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a> -->
@@ -111,7 +111,8 @@
                 </ul>
                 <div class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="components.html" class="btn btn-dark mt-1 btn-sm">로그인</a><a href="#" class="btn btn-danger mt-1 btn-sm">회원가입</a>
+                        <a href="components.html" style="background-color:#0B4C5F; border-radius:15px;" class="btn btn-danger mt-1 btn-sm">로그인</a>
+                        <a href="#" style="background-color:#ffc90e; color:black; border-radius:15px;" class="btn btn-danger mt-1 btn-sm">회원가입</a>
                     </li>
                 </div>
                 <div class="navbar-nav ml-auto">

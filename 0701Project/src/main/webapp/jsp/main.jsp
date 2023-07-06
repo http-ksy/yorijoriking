@@ -15,11 +15,23 @@
     <!-- font icons -->
     <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + JoeBLog main styles -->
-<!--      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+
 	<link rel="stylesheet" href="../assets/css/joeblog.css">
 	<link rel="stylesheet" href="../fontawesome/css/all.min.css">
     <link rel="stylesheet" href="../css/templatemo-style.css">
+    
+<!-- 폰트 -->    
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<style type="text/css">
+*{
+	font-family: 'Jua', sans-serif;
+}
+</style>
+
 </head>
+
 <body> 
 <jsp:include page="nav.jsp"></jsp:include>
 <jsp:include page="header.jsp"></jsp:include>
