@@ -12,26 +12,36 @@
 /*   position: -webkit -sticky;
   position: sticky; */
   top:195px;
+  
 }
 
-li a.ll, li a.home {
-  text-decoration: none;
+li a.ll {
+ /*  text-decoration: none;
   padding: 10px;
   display: block;
   color: #000;
-  font-weight: bold;
+  font-weight: bold; */
+  border: 1px solid;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;   
+  color: #198754;
 }
-
-li a.ll:hover {
+.clicked {
   background: #198754;
   color: #fff;
 }
+ li a.ll:hover {
+  background: #198754;
+  color: #fff;
+} 
 
-li a.home {
+/* li a.home {
   background : #198754;
   color: #fff;
 }
- 
+  */
  
  
  .search-form {

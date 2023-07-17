@@ -2,7 +2,8 @@ package com.sist.vo;
 import java.util.*;
 
 /*
- 	bno 	NUMBER,
+	bno NUMBER,
+	cno NUMBER,
 	name VARCHAR2(51) CONSTRAINT yf_name_nn NOT NULL,
 	subject VARCHAR2(2000) CONSTRAINT yf_sub_nn NOT NULL,
 	content CLOB CONSTRAINT yf_cont_nn NOT NULL,
@@ -12,14 +13,28 @@ import java.util.*;
 	regdate DATE DEFAULT SYSDATE,
 	hit NUMBER DEFAULT 0,
 	suggest NUMBER DEFAULT 0,
-	CONSTRAINT yf_bno_pk PRIMARY KEY(bno)
+	CONSTRAINT yf_bno_pk PRIMARY KEY(bno),
+	CONSTRAINT yf_cno_fk FOREIGN KEY(cno) REFERENCES board_category(no)
 );
  */
 public class FreeBoardVO {
-	private int bno,filesize,hit,suggest,rownum;
-	private String name,subject,content,filename,pwd,dbday;
+	private int bno,cno,filesize,hit,suggest,rownum;
+	private String id,name,subject,content,filename,pwd,dbday;
 	private Date regdate;
-	
+
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public int getBno() {
 		return bno;
 	}

@@ -26,7 +26,7 @@ $(function(){
 		 }
 		else if(count>=1)
 		{
-		 let no=$('jjims').attr('data-cancel')
+		 let no=$('.jjims').attr('data-cancel')
 		 $.ajax({
 			type:'post',
 			url:'../jjim/jjim_delete.do',

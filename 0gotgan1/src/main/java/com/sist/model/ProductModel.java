@@ -66,11 +66,11 @@ public class ProductModel {
 		JjimDAO jdao=JjimDAO.newInstance();
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		int count=jdao.JjimCount(id, Integer.parseInt(pdno), 1);
+		int count=jdao.JjimCount(id, Integer.parseInt(pdno), 3);
 		int no=0;
 		if(count>0)
 		{
-			no=jdao.jjimNo(id, Integer.parseInt(pdno), 1);
+			no=jdao.jjimNo(id, Integer.parseInt(pdno), 3);
 		}
 		request.setAttribute("no", no);
 		request.setAttribute("count", count);

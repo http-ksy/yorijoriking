@@ -11,26 +11,54 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../board/css/search-bar.css">
+<style type="text/css">
+   .a li.selected{
+                background-color: #e26262;
+                color:#fff;
+                font-weight: 600;
+            }
+</style>
+<script type="text/javascript">
+const menuWrap = document.querySelector('.a');
 
+function select(ulEl, liEl){
+    Array.from(ulEl.children).forEach(
+        v => v.classList.remove('selected')
+    )
+    if(liEl) liEl.classList.add('selected');
+}
 
+menuWrap.addEventListener('click', e => {
+    const selected = e.target;
+    select(menuWrap, selected);
+})
+
+</script>
 </head>
 <body>
 <div>
 <ul class="a">
-  <li><a class="home" href="#">전체</a></li>
-  <li><a class="ll" href="#">공지</a></li>
-  <li><a class="ll" href="#">레시피</a></li>
-  <li><a class="ll" href="#">스토어</a></li>
-  <li><a class="ll" href="#">공유주방</a></li>
+  <li><a class="ll" href="../board/list.do?cno=0">전체</a></li>
+  <li><a class="ll" href="../board/list.do?cno=1">자유</a></li>
+  <li><a class="ll" href="../board/list.do?cno=2">공지</a></li>
+  <li><a class="ll" href="../board/list.do?cno=3">레시피</a></li>
+  <li><a class="ll" href="../board/list.do?cno=4">스토어</a></li>
+  <li><a class="ll" href="../board/list.do?cno=5">공유주방</a></li>
 </ul>
 </div>
 
     <div class="wrapper row3">
     <main class="container clear">
-     <table class = "table">
+     <table class = "table"> 
         <tr>
          <td>
-          <a href="" class="btn btn-success" role="button" id="write-article" >글쓰기</a>
+         <c:if test="${sessionScope.id != null }">
+          <a href="../board/board_insert.do" class="btn btn-success" role="button" id="write-article" >글쓰기</a>
+         </c:if> 
+          <c:if test="${sessionScope.id == null }">
+           <a href="../member/login.do" class="btn btn-success" role="button" id="write-article">로그인을 하시면 글 작성이 가능합니다</a>
+          </c:if>
+         
 <!--               <div class="row"> -->
          <div class="card card-margin search-form">
             <div class="card-body p-0">
@@ -89,8 +117,9 @@
             <c:forEach var="vo" items="${list}">
             <tr class="table">
                 <td width=10% class="text-center">${vo.bno }</td>
-                <td width=20% class="text-center">${vo.subject }</td>
+                <td width=20%><a href="../board/board_detail.do?bno=${vo.bno}">${vo.subject }</a></td>
                 <td width=10% class="text-center">${vo.name }</td>
+               <%-- <c:if test=""></c:if> --%>
                 <td width=10% class="text-center">${vo.dbday }</td>
                 <td width=10% class="text-center">${vo.hit }</td>
                 <td width=10% class="text-center">${vo.suggest }</td>
@@ -108,20 +137,20 @@
          <nav id="pagination" aria-label="Page navigation" style="margin-left:400px;">
 	            <ul class="pagination justify-content-center">
 		 			<c:if test="${curpage>1 }">
-		            <li class="page-item"><a class="page-link" href="list.do?page=${curpage>1?curpage-1:curpage }">Previous</a></li>
+		            <li class="page-item"><a class="page-link" href="../board/list.do?page=${curpage>1?curpage-1:curpage }&cno=${cno}">Previous</a></li>
 					</c:if>
 					
 		             <c:forEach var="i" begin="${startpage }" end="${endpage }">
 		             	<c:if test="${i==curpage }">
-		             	<li class="page-item"><a class="active" class="active" href="list.do?page=${i }">${i }</a></li>
+		             	<li class="page-item"><a class="active" class="active" href="../board/list.do?page=${i }&cno=${cno}">${i }</a></li>
 		             	</c:if>
 		             	<c:if test="${i!=curpage }">
-		             	<li class="page-item"><a class="page-link" class="active" href="list.do?page=${i }">${i }</a></li>
+		             	<li class="page-item"><a class="page-link" class="active" href="../board/list.do?page=${i }&cno=${cno}">${i }</a></li>
 		             	</c:if>
 		             </c:forEach> 
 		             
 	                <c:if test="${curpage<totalpage }">
-	                <li class="page-item"><a class="page-link" href="list.do?page=${curpage<totalpage?curpage+1:curpage }">Next</a></li>
+	                <li class="page-item"><a class="page-link" href="../board/list.do?page=${curpage<totalpage?curpage+1:curpage }&cno=${cno}">Next</a></li>
 	              </c:if>
 	            </ul>
 	        </nav>

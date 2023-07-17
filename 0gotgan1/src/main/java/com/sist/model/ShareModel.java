@@ -6,8 +6,10 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+import com.sist.dao.JjimDAO;
 import com.sist.dao.ShareDAO;
 import com.sist.vo.RecipeVO;
 import com.sist.vo.ShareVO;
@@ -54,7 +56,19 @@ public class ShareModel {
 		  ShareDAO sdao=ShareDAO.newInstance();
 		  String skdno=request.getParameter("skdno");
 		  ShareVO svo=sdao.shareDetailData(Integer.parseInt(skdno));
+		  JjimDAO jdao=JjimDAO.newInstance();
+		  HttpSession session=request.getSession();
+		  String id=(String)session.getAttribute("id");
+		  int count=jdao.JjimCount(id, Integer.parseInt(skdno), 4);
+		  int no=0;
+		  if(count>0)
+		  {
+			  no=jdao.jjimNo(id, Integer.parseInt(skdno), 4);
+		  }
+		  request.setAttribute("no", no);
+		  request.setAttribute("count", count);
 		  request.setAttribute("svo", svo);
+		  request.setAttribute("skdno", skdno);
 		  Cookie[] cookies=request.getCookies();
 		  List<ShareVO> clist=new ArrayList<>();
 		  if(cookies!=null)
@@ -71,7 +85,7 @@ public class ShareModel {
 				  
 		  }
 		request.setAttribute("clist", clist);
-		request.setAttribute("skdno", skdno);
+		
 		request.setAttribute("main_jsp", "../share/shareDetail.jsp");
 		  return "../jsp/main.jsp";
 	}
