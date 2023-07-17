@@ -189,7 +189,7 @@ public class FreeBoardDAO {
 		try {
 			conn=db.getConnection();
 			String sql = "INSERT INTO yori_freeboard(bno,name,subject,content,filename,filesize,pwd,cno,id) VALUES("
-					+ "yf_bno_seq.nextval,?,?,?,?,?,?,?,?)";
+					+ "(SELECT NVL(MAX(bno)+1,1) FROM yori_freeboard),?,?,?,?,?,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, vo.getName());
 			ps.setString(2, vo.getSubject());
@@ -230,6 +230,16 @@ public class FreeBoardDAO {
 			
 			if(db_pwd.equals(pwd)) {
 				res = "YES";
+				sql="DELETE FROM freeboard_like WHERE bno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, bno);
+				ps.executeUpdate();
+				
+				sql="DELETE FROM freeboard_reply WHERE bno=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, bno);
+				ps.executeUpdate();
+				
 				sql="DELETE FROM yori_freeboard WHERE bno=?";
 				ps=conn.prepareStatement(sql);
 				ps.setInt(1, bno);
