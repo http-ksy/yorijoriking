@@ -5,6 +5,11 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style>
+.img{
+height: 200px;
+}
+</style>
 </head>
 <body>
 	
