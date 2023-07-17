@@ -18,7 +18,7 @@ public class FreeBoardModel {
 		FreeBoardDAO dao = FreeBoardDAO.newInstance();
 		
 		String page = request.getParameter("page");
-		final int BLOCK=8;
+		final int BLOCK=5;
 		if(page==null)
 			page="1";
 		int curpage = Integer.parseInt(page);
