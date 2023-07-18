@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-
+let u=0
 $(function(){
 	$('#jjim').click(function(){
 		let skdno=$(this).attr('data-no')
@@ -49,6 +49,33 @@ $(function(){
 				}
 			})
 		}
+	})
+	 $('.ups').click(function() {
+
+		let no=$(this).attr('data-no2');
+
+	$('.ups').text("수정");
+
+	if(u==0) {
+
+		$('#u'+no).show();
+
+		$(this).text("취소");
+
+		u=1;
+
+	} else {
+
+		$('#u'+no).hide();
+
+		$(this).text("수정");
+
+		u=0;
+
+	}
+
+		
+
 	})
 })
 </script>
@@ -197,9 +224,9 @@ $(function(){
 
                				        <c:if test="${sessionScope.id==rpvo.id }">
 
-               				         <span class="btn btn-xs btn-danger ups" data-no="${rpvo.no }">수정</span>
+               				         <span class="btn btn-xs btn-danger ups" data-no2="${rpvo.no }">수정</span>
 
-			                         <a href="../reply/reply_delete.do?no=${rpvo.no }&type=2&skdno=${svo.skdno }" class="btn btn-xs btn-primary">삭제</a>
+			                         <a href="../reply/reply_delete.do?no=${rpvo.no }&type=2&rdno=${svo.skdno }" class="btn btn-xs btn-primary">삭제</a>
 
                				        </c:if>
 
@@ -225,11 +252,11 @@ $(function(){
 
 								  	   <form method="post" action="../reply/reply_update.do" class="inline">
 
-								  	     <input type=hidden name=skdno value="${svo.skdno }"> 		  	
+								  	     <input type=hidden name=rdno value="${svo.skdno }"> 		  	
 
 								  	     <input type=hidden name=no value="${rpvo.no }"> 
 
-								  	     <input type="hidden" name="type" value="1">
+								  	     <input type="hidden" name="type" value="2">
 
 								  	     <textarea rows="5" cols="60" name="msg" class="form-control">${rpvo.msg }</textarea>
 

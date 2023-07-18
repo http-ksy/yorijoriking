@@ -424,7 +424,7 @@
 
                				         <span class="btn btn-xs btn-danger ups" data-no2="${rpvo.no }">수정</span>
 
-			                         <a href="../reply/reply_delete.do?no=${rpvo.no }&type=2&fdno=${vo.fdno }" class="btn btn-xs btn-primary">삭제</a>
+			                         <a href="../reply/reply_delete.do?no=${rpvo.no }&type=2&rdno=${vo.fdno }" class="btn btn-xs btn-primary">삭제</a>
 
                				        </c:if>
 
