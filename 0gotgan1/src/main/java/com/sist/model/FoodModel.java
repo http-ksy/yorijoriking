@@ -7,10 +7,12 @@ import java.util.StringTokenizer;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.FoodVO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.ShareVO;
 
 public class FoodModel {
@@ -62,6 +64,11 @@ public class FoodModel {
  {
 	 String fdno=request.getParameter("fdno");
 	 FoodDAO dao=FoodDAO.newInstance();
+	 JjimDAO jdao= JjimDAO.newInstance();
+	 HttpSession session=request.getSession();
+	 String id=(String)session.getAttribute("id");
+	 int no=jdao.jjimNo(id, Integer.parseInt(fdno), 2);
+	 request.setAttribute("no", no);
 	 FoodVO vo=dao.foodDetailData(Integer.parseInt(fdno));
 	 String poster=vo.getPoster();
 	 List<String> posters=new ArrayList<>();
@@ -96,6 +103,11 @@ public class FoodModel {
 	 request.setAttribute("clist", clist);
 	 request.setAttribute("fdno", fdno);
 	 request.setAttribute("main_jsp", "../food/foodDetail.jsp");
+	 String cno = request.getParameter("fdno");
+	 ReplyDAO rdao = ReplyDAO.newInstance();
+
+	 List<ReplyVO> list = rdao.replyListData(4, Integer.parseInt(cno));
+	 request.setAttribute("rList", list);
 	 return "../jsp/main.jsp";
  }
 }

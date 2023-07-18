@@ -28,32 +28,94 @@ $(function(){
 <body>
   <div class="container">
   <h2 class="sectiontitle">${sessionScope.name }님의 찜 목록</h2>
+  <div class="text-right">
+    <a class="btn btn-xs " href="../jjim/jjim_list.do?type=1"  >레시피</a>
+    <a class="btn btn-xs " href="../jjim/jjim_list.do?type=2"  >맛집</a>
+    <a class="btn btn-xs " href="../jjim/jjim_list.do?type=3"  >스토어</a>
+    <a class="btn btn-xs " href="../jjim/jjim_list.do?type=4"  >공유주방</a>
+  </div>
    <table class="table">
    <tr>
    	<th class="text-center">번호</th>
    	<th class="text-center"></th>
    	<th class="text-center">제목</th>
-<!--    	<th class="text-center">쉐프</th> -->
+   	<c:if test="${type==1 }">
+   	<th class="text-center">쉐프</th>
+   </c:if>
+   <c:if test="${type==2 }">
+   	<th class="text-center">전화</th>
+   </c:if>
+   <c:if test="${type==3 }">
+   	<th class="text-center">가격</th>
+   </c:if>
+   <c:if test="${type==4 }">
+   	<th class="text-center">가격</th>
+   </c:if>
    	<th class="text-center"></th>
    </tr>
    <c:forEach var="vo" items="${list}">
      <tr>
     <td class="text-center titleno" data-no="${vo.no }">a</td>
+    <c:if test="${type==1 }">
    	<td class="text-center">
    	<a href="../list/recipeDetail.do?rdno=${vo.cno }"><img src="${vo.poster }" style="width: 30px;height: 30px"></a>
    	</td>
    	<td class="text-center"><a href="../list/recipeDetail.do?rdno=${vo.cno }">${vo.title }</a></td>
-   	
-<%--    	<td class="text-center">${vo.chef }</td> --%>
+   	</c:if>
+   	<c:if test="${type==2 }">
+   	<td class="text-center">
+   	<a href="../food/foodDetail.do?fdno=${vo.cno }"><img src="${vo.poster }" style="width: 30px;height: 30px"></a>
+   	</td>
+   	<td class="text-center"><a href="../food/foodDetail.do?fdno=${vo.cno }">${vo.title }</a></td>
+   	</c:if>
+   	<c:if test="${type==3 }">
+   	<td class="text-center">
+   	<a href="../product/productDetail.do?pdno=${vo.cno }"><img src="${vo.poster }" style="width: 30px;height: 30px"></a>
+   	</td>
+   	<td class="text-center"><a href="../product/productDetail.do?pdno=${vo.cno }">${vo.title }</a></td>
+   	</c:if>
+   	<c:if test="${type==4 }">
+   	<td class="text-center">
+   	<a href="../share/shareDetail.do?skdno=${vo.cno }"><img src="${vo.poster }" style="width: 30px;height: 30px"></a>
+   	</td>
+   	<td class="text-center"><a href="../share/shareDetail.do?skdno=${vo.cno }">${vo.title }</a></td>
+   	</c:if>
+   	<c:if test="${type==1 }">
+   	<td class="text-center">${vo.chef }</td>
+    </c:if>
+    <c:if test="${type==2 }">
+   	<td class="text-center">${vo.tel }</td>
+    </c:if>
+    <c:if test="${type==3 }">
+   	<td class="text-center">${vo.price }</td>
+    </c:if>
+    <c:if test="${type==4 }">
+   	<td class="text-center">${vo.price }</td>
+    </c:if>
    	<td class="text-center">
    	   <span class="b1">취소</a>
    	</td>
      </tr>
    </c:forEach>
    </table>
-<!--    <div class="text-center"> -->
-<!--    <a href="jjim_list.do?page!!type?!!!"></a> -->
-<!--    </div> -->
+<div class="text-center">
+			<ul class="pagination">
+  	 	  <c:if test="${startpage>1 }">
+  	 	  	<li><a href="jjim_list.do?type=${type}&page=${startpage-1 }" >&lt;</a></li> 
+  	 	  </c:if>
+  	 	  <c:forEach var="i" begin="${startpage }" end="${endpage }">
+  	 	     <c:if test="${curpage==i }">
+  	 	     <li class="active"><a href="jjim_list.do?type=${type}&page=${i}">${i }</a></li>
+  	 	     </c:if>
+  	 	     <c:if test="${curpage!=i }">
+  	 	     <li class=""><a href="jjim_list.do?type=${type}&page=${i}">${i }</a></li>
+  	 	     </c:if>
+  	 	  </c:forEach>
+  	 	   <c:if test="${endpage<totalpage }">
+  	 	    <li><a href="jjim_list.do?type=${type}&page=${endpage+1 }">&gt;</a></li>
+  	 	  </c:if>
+  	 	  	</ul>
+  	 	  </div>
 </div>
 </body>
 </html>

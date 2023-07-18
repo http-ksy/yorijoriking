@@ -11,7 +11,9 @@ import javax.servlet.http.*;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.JjimDAO;
 import com.sist.dao.RecipeDAO;
+import com.sist.dao.ReplyDAO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.ReplyVO;
 
 public class ListModel {
 
@@ -133,6 +135,13 @@ public String recilpeList_page(HttpServletRequest request,HttpServletResponse re
 		 request.setAttribute("clist", clist);
 		 
 		 request.setAttribute("main_jsp", "../list/recipeDetail.jsp");
+		 
+		 String cno = request.getParameter("rdno");
+		 ReplyDAO rdao = ReplyDAO.newInstance();
+
+		 List<ReplyVO> list = rdao.replyListData(1, Integer.parseInt(cno));
+
+		 request.setAttribute("rList", list);
 		 return "../jsp/main.jsp";
 	 }
 //	@RequestMapping("list/recipeCookieDel.do")

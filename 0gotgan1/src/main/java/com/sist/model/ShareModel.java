@@ -10,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.JjimDAO;
+import com.sist.dao.ReplyDAO;
 import com.sist.dao.ShareDAO;
 import com.sist.vo.RecipeVO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.ShareVO;
 
 public class ShareModel {
@@ -87,6 +89,12 @@ public class ShareModel {
 		request.setAttribute("clist", clist);
 		
 		request.setAttribute("main_jsp", "../share/shareDetail.jsp");
+		 String cno = request.getParameter("skdno");
+		 ReplyDAO rdao = ReplyDAO.newInstance();
+		 System.out.println(cno);
+		 List<ReplyVO> list = rdao.replyListData(2, Integer.parseInt(cno));
+
+		 request.setAttribute("rList", list);
 		  return "../jsp/main.jsp";
 	}
 }

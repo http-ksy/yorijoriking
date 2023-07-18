@@ -43,13 +43,28 @@ public class JjimModel {
 	@RequestMapping("jjim/jjim_list.do")
 	public String jjim_list(HttpServletRequest request,HttpServletResponse response)
 	{
+		String page=request.getParameter("page");
 		String type=request.getParameter("type");
+		final int BLOCK=10;
+		if(page==null) page="1";
 		if(type==null) type="1";
+		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		List<JjimVO> list=new ArrayList<>();
 		JjimDAO dao=JjimDAO.newInstance();
-		list=dao.jjimListData(id, Integer.parseInt(type));
+		 int curpage=Integer.parseInt(page);
+		 int startpage=((curpage-1)/BLOCK*BLOCK)+1;
+		 int endpage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		 int totalpage=dao.jjimTotalPage(id, Integer.parseInt(type));
+		 if(endpage>totalpage)
+				endpage=totalpage; 
+		list=dao.jjimListData(id, Integer.parseInt(type), curpage);
+		request.setAttribute("curpage", curpage);
+		 request.setAttribute("totalpage", totalpage);
+		 request.setAttribute("startpage", startpage);
+		 request.setAttribute("endpage", endpage);
+		request.setAttribute("type", type);
 		request.setAttribute("list", list);
 		request.setAttribute("jsp","../my/jjim_list.jsp");
 		request.setAttribute("main_jsp", "../my/mypage.jsp");

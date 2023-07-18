@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -9,7 +8,50 @@
 <head>
 
 <meta charset="UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
 
+$(function(){
+	$('#jjim').click(function(){
+		let skdno=$(this).attr('data-no')
+		let count=$(this).attr('data-cnt')
+		let types=$(this).attr('data-type')
+		if(count==0)
+		{
+			$.ajax({
+				type:'post',
+				data:{'types':types,'jno':skdno},
+				url:'../jjim/insert.do',
+				success:function(result)
+				{
+					alert('찜하기 완료')
+					location.reload();
+				}
+			})	
+		}
+		
+	})
+	$('#jjims').click(function(){
+		let no = $(this).attr('data-cancel')
+		let count=$(this).attr('data-cnt')
+		console.log('no='+no)
+		console.log('count='+count)
+		if(count>=1)
+		{
+			$.ajax({
+				type:'post',
+				url:'../jjim/jjim_delete.do',
+				data:{'no':no},
+				success:function(result)
+				{
+					alert('찜하기 취소')
+					loacation.reload();
+				}
+			})
+		}
+	})
+})
+</script>
 <title>Insert title here</title>
 
 </head>
@@ -115,128 +157,122 @@
                     </div>
 					<div class="text-center">
 					<a class="btn  b1" style="width: 150px" href="javascript:history.back()">목록으로</a> 
+					<c:if test="${sessionScope.id!=null }">
+					<c:if test="${no==0 }">
+					<span class="btn  b1" id="jjim" style="width: 150px"  data-type="4" data-cnt="${count }" data-no="${skdno }" >찜하기</span> 
+					</c:if>
+					
+					<c:if test="${no!=0 }">
+					<span class="btn  b1" id="jjims" style="width: 150px" data-cancel="${no }" data-cnt="${count }">찜하기 취소</span> 
+					</c:if>
+					</c:if>
 					</div>
-                    <div class="card-footer">
+                   <div class="card-footer">
 
-                         <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Comments 4</a></h6>
+              <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">댓글</a></h6>
 
                         <hr>
 
-                        <div class="media">
+                       <div class="media">
 
-                            <img src="assets/imgs/avatar-1.jpg" class="mr-3 thumb-sm rounded-circle" alt="...">
+                         <table class="table">
 
-                            <div class="media-body">
+                           <tr>
 
-                                <h6 class="mt-0">Janice Wilder</h6>
+                            <td>
 
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
+                          <c:forEach var="rpvo" items="${rList }">
 
-                                <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
+                                <table class="table">
 
-                                <div class="media mt-5">
+                                 <tr>
 
-                                    <a class="mr-3" href="#">
+                                  <td class="text-left">
 
-                                    <img src="assets/imgs/avatar.jpg" class="thumb-sm rounded-circle" alt="...">
+                                   ●${rpvo.name }&nbsp;(${rpvo.dbday })
 
-                                    </a>
+                                   </td>
 
-                                    <div class="media-body align-items-center">
+                                   <td class="text-right">
 
-                                        <h6 class="mt-0">Joe Mitchell</h6>
+               				        <c:if test="${sessionScope.id==rpvo.id }">
 
-                                        <p>Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus</p>
+               				         <span class="btn btn-xs btn-danger ups" data-no="${rpvo.no }">수정</span>
 
-                                        <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
+			                         <a href="../reply/reply_delete.do?no=${rpvo.no }&type=2&skdno=${svo.skdno }" class="btn btn-xs btn-primary">삭제</a>
 
+               				        </c:if>
 
+                                   </td>
 
-                                    </div>
+                                 </tr>
 
-                                </div>
+                                 <tr>
 
-                            </div>
+                                  <td>
+
+                                   <pre>${rpvo.msg }</pre>                           
+
+                                  </td>
+
+                                 </tr>  
+
+                                                             
+
+                                 <tr style="display:none" class="updates" id="u${rpvo.no}"> 
+
+				 			          <td colspan="2">
+
+								  	   <form method="post" action="../reply/reply_update.do" class="inline">
+
+								  	     <input type=hidden name=skdno value="${svo.skdno }"> 		  	
+
+								  	     <input type=hidden name=no value="${rpvo.no }"> 
+
+								  	     <input type="hidden" name="type" value="1">
+
+								  	     <textarea rows="5" cols="60" name="msg" class="form-control">${rpvo.msg }</textarea>
+
+										 <input type=submit value="댓글수정" class="btn btn-primary btn-block">
+
+								  	   </form>
+
+								  	  </td>
+
+								  </tr>                                          
+
+                            </table>                                                                                                                                                                                                                                                                                      
+
+                         </c:forEach>
+
+                          </tr>
+
+                         </table>
 
                         </div>
 
-                        <div class="media mt-5">
-
-                            <img src="assets/imgs/avatar-2.jpg" class="mr-3 thumb-sm rounded-circle" alt="...">
-
-                            <div class="media-body">
-
-                                <h6 class="mt-0">Crosby Meadows</h6>
-
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
-
-                                <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
-
-                            </div>
-
-                        </div>
-
-                        <div class="media mt-4">
-
-                            <img src="assets/imgs/avatar-3.jpg" class="mr-3 thumb-sm rounded-circle" alt="...">
-
-                            <div class="media-body">
-
-                                <h6 class="mt-0">Jean Wiley</h6>
-
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
-
-                                <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
-
-                            </div>
-
-                        </div>
-
-
+<%--댓글 --%>
 
                         <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Write Your Comment</a></h6>
 
                         <hr>
+                      <c:if test="${sessionScope.id != null }">
 
-                        <form>
+                       <form method="post" action="../reply/reply_insert.do" class="inline">
 
-                            <div class="form-row">
+						 <input type=hidden name=rdno value="${svo.skdno }">
 
-                                <div class="col-12 form-group">
+						 <input type=hidden name=type value="2">
 
-                                    <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="Enter Your Comment Here"></textarea>
+                         <textarea rows="5" cols="60" name="msg" id="msg" class="form-control" placeholder="댓글을 작성해주세요."></textarea>                                             
 
-                                </div>
-
-                                <div class="col-sm-4 form-group">
-
-                                    <input type="text" class="form-control" value="Name">
-
-                                </div>
-
-                                <div class="col-sm-4 form-group">
-
-                                    <input type="email" class="form-control" placeholder="Email">
-
-                                </div>
-
-                                <div class="col-sm-4 form-group">
-
-                                    <input type="url" class="form-control" placeholder="Website">
-
-                                </div>
-
-                                <div class="form-group col-12">
-
-                                    <button class="btn btn-primary btn-block">Post Comment</button>
-
-                                </div>
-
-                            </div>
+                         <input type=submit class="btn btn-primary btn-block" value="댓글쓰기" >             
 
                         </form>
 
-                    </div>                  
+                      </c:if>                      
+
+                 </div>
 
                 </div> 
 

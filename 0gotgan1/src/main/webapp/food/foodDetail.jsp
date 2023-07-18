@@ -16,6 +16,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
  let i =0
+ let u =0
  $(function(){
 	 $('#reservebtn').click(function(){
 		 let fdno=$(this).attr("data-no");
@@ -40,6 +41,61 @@
 			 i=0;
 		}
 	 })
+	 $('#jjim').click(function(){
+		 let types=$(this).attr('data-type')
+		 let fdno=$(this).attr('data-no')
+		 let no=$(this).attr('data-num')
+		 $.ajax({
+			 type:'post',
+			 data:{'jno':fdno,'types':types},
+			 url:'../jjim/insert.do',
+			 success:function(result)
+			 {
+				 alert('찜하기 완료')
+				 location.reload();
+			 }
+		 })
+	 })
+	  $('#jjims').click(function(){
+		 let no=$(this).attr('data-num')
+		 $.ajax({
+			 type:'post',
+			 data:{'no':no},
+			 url:'../jjim/jjim_delete.do',
+			 success:function(result)
+			 {
+				 alert('찜하기 취소')
+				 location.reload();
+			 }
+		 })
+	 })
+	 $('.ups').click(function() {
+
+		let no=$(this).attr('data-no2');
+
+	$('.ups').text("수정");
+
+	if(u==0) {
+
+		$('#u'+no).show();
+
+		$(this).text("취소");
+
+		u=1;
+
+	} else {
+
+		$('#u'+no).hide();
+
+		$(this).text("수정");
+
+		u=0;
+
+	}
+
+		
+
+	})
  })
 </script>
 
@@ -242,12 +298,20 @@
                     		<pre>${vo.time }</pre>
 
                      </div>
-
+					</c:if>
                      <div class="text-center">
      	 			
      				 <a  class="btn b1"  style="width: 150px" href="javascript:history.back()">맛집목록</a>
         		 	 <a  class="btn  b1 rrr" id="reservebtn"  style="width: 150px" data-no="${vo.fdno }">예약하기</a> 
-        		 	 <a  class="btn  b1"   style="width: 150px" data-no="${vo.fdno }">찜</a> 
+<%--         		 	 <a  class="btn  b1"   style="width: 150px" data-no="${vo.fdno }">찜</a>  --%>
+					<c:if test="${sessionScope.id!=null }">
+					  <c:if test="${no==0 }">
+					  <button class=" btn b1" id="jjim"  data-no="${fdno }" data-type="2" data-num="${no }">찜하기</button>
+					  </c:if>
+					  <c:if test="${no!=0 }">
+					  <button class="btn b1" id="jjims"  data-num="${no }">찜하기 취소</button>
+					  </c:if>
+					</c:if>
     				 </div>
     				 <!-- res -->
     				  <div class="container" style="display:none" id="reserve_window">
@@ -327,129 +391,113 @@
     				  
     				  </div>
     				 <!-- end 예약 -->
-                    </c:if>
+                    
+         <div class="card-footer">
 
-                    <div class="card-footer">
-
-                         <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Comments 4</a></h6>
+              <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">댓글</a></h6>
 
                         <hr>
 
-                        <div class="media">
+                       <div class="media">
 
-                            <img src="assets/imgs/avatar-1.jpg" class="mr-3 thumb-sm rounded-circle" alt="...">
+                         <table class="table">
 
-                            <div class="media-body">
+                           <tr>
 
-                                <h6 class="mt-0">Janice Wilder</h6>
+                            <td>
 
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
+                          <c:forEach var="rpvo" items="${rList }">
 
-                                <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
+                                <table class="table">
 
-                                <div class="media mt-5">
+                                 <tr>
 
-                                    <a class="mr-3" href="#">
+                                  <td class="text-left">
 
-                                    <img src="assets/imgs/avatar.jpg" class="thumb-sm rounded-circle" alt="...">
+                                   ●${rpvo.name }&nbsp;(${rpvo.dbday })
 
-                                    </a>
+                                   </td>
 
-                                    <div class="media-body align-items-center">
+                                   <td class="text-right">
 
-                                        <h6 class="mt-0">Joe Mitchell</h6>
+               				        <c:if test="${sessionScope.id==rpvo.id }">
 
-                                        <p>Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus</p>
+               				         <span class="btn btn-xs btn-danger ups" data-no2="${rpvo.no }">수정</span>
 
-                                        <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
+			                         <a href="../reply/reply_delete.do?no=${rpvo.no }&type=2&fdno=${vo.fdno }" class="btn btn-xs btn-primary">삭제</a>
 
+               				        </c:if>
 
+                                   </td>
 
-                                    </div>
+                                 </tr>
 
-                                </div>
+                                 <tr>
 
-                            </div>
+                                  <td>
+
+                                   <pre>${rpvo.msg }</pre>                           
+
+                                  </td>
+
+                                 </tr>  
+
+                                                             
+
+                                 <tr style="display:none" class="updates" id="u${rpvo.no}"> 
+
+				 			          <td colspan="2">
+
+								  	   <form method="post" action="../reply/reply_update.do" class="inline">
+
+								  	     <input type=hidden name=rdno value="${vo.fdno }"> 		  	
+
+								  	     <input type=hidden name=no value="${rpvo.no }"> 
+
+								  	     <input type="hidden" name="type" value="4">
+
+								  	     <textarea rows="5" cols="60" name="msg" class="form-control">${rpvo.msg }</textarea>
+
+										 <input type=submit value="댓글수정" class="btn btn-primary btn-block">
+
+								  	   </form>
+
+								  	  </td>
+
+								  </tr>                                          
+
+                            </table>                                                                                                                                                                                                                                                                                      
+
+                         </c:forEach>
+
+                          </tr>
+
+                         </table>
 
                         </div>
 
-                        <div class="media mt-5">
-
-                            <img src="assets/imgs/avatar-2.jpg" class="mr-3 thumb-sm rounded-circle" alt="...">
-
-                            <div class="media-body">
-
-                                <h6 class="mt-0">Crosby Meadows</h6>
-
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
-
-                                <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
-
-                            </div>
-
-                        </div>
-
-                        <div class="media mt-4">
-
-                            <img src="assets/imgs/avatar-3.jpg" class="mr-3 thumb-sm rounded-circle" alt="...">
-
-                            <div class="media-body">
-
-                                <h6 class="mt-0">Jean Wiley</h6>
-
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</p>
-
-                                <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a>
-
-                            </div>
-
-                        </div>
-
-
+<%--댓글 --%>
 
                         <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Write Your Comment</a></h6>
 
                         <hr>
+                      <c:if test="${sessionScope.id != null }">
 
-                        <form>
+                       <form method="post" action="../reply/reply_insert.do" class="inline">
 
-                            <div class="form-row">
+						 <input type=hidden name=rdno value="${vo.fdno }">
 
-                                <div class="col-12 form-group">
+						 <input type=hidden name=type value="4">
 
-                                    <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="Enter Your Comment Here"></textarea>
+                         <textarea rows="5" cols="60" name="msg" id="msg" class="form-control" placeholder="댓글을 작성해주세요."></textarea>                                             
 
-                                </div>
-
-                                <div class="col-sm-4 form-group">
-
-                                    <input type="text" class="form-control" value="Name">
-
-                                </div>
-
-                                <div class="col-sm-4 form-group">
-
-                                    <input type="email" class="form-control" placeholder="Email">
-
-                                </div>
-
-                                <div class="col-sm-4 form-group">
-
-                                    <input type="url" class="form-control" placeholder="Website">
-
-                                </div>
-
-                                <div class="form-group col-12">
-
-                                    <button class="btn btn-primary btn-block">Post Comment</button>
-
-                                </div>
-
-                            </div>
+                         <input type=submit class="btn btn-primary btn-block" value="댓글쓰기" >             
 
                         </form>
 
-                    </div>                  
+                      </c:if>                      
+
+                 </div>                  
 
                 </div> 
 

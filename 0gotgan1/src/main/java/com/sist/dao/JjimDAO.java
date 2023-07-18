@@ -64,7 +64,7 @@ public class JjimDAO {
 		}
 		return count;
 	}
-	public List<JjimVO> jjimListData(String id,int type){
+	public List<JjimVO> jjimListData(String id,int type,int page){
 		List<JjimVO> list = new ArrayList<>();
 		try {
 			conn = db.getConnection();
@@ -78,10 +78,22 @@ public class JjimDAO {
 //		--------------------------------------
 //		공유주방 -> 이름 , 사진, 가격 getPrice;
 			
-			
-		
-			
-		
+//			String sql = "select no,cno,"
+//					+ "nvl(recipegettitle(cno),'no'), "
+//					+ "nvl(recipegetPoster(cno),'no'), "
+//					+ "nvl(recipegetchef(cno),'no'), "
+//					+ "nvl(foodgettitle(cno),'no'),"
+//					+ "nvl(foodgetposter(cno),'no'),"
+//					+ "nvl(foodgettel(cno),'no'), "
+//					+ "nvl(productgettitle(cno),'no'),"
+//					+ "nvl(productgetposter(cno),'no'),"
+//					+ "nvl(productgetprice(cno),'no'),"
+//					+ "nvl(sharegettitle(cno),'no'),"
+//					+ "nvl(sharegetposter(cno),'no'),"
+//					+ "nvl(sharegetprice(cno),'no') "
+//					+ "FROM jjim "
+//					+ "where id=? and type=? "
+//					+ "order by no desc";
 			String sql = "select no,cno,"
 					+ "nvl(recipegettitle(cno),'no'), "
 					+ "nvl(recipegetPoster(cno),'no'), "
@@ -94,13 +106,44 @@ public class JjimDAO {
 					+ "nvl(productgetprice(cno),'no'),"
 					+ "nvl(sharegettitle(cno),'no'),"
 					+ "nvl(sharegetposter(cno),'no'),"
+					+ "nvl(sharegetprice(cno),'no'),num "
+					+ "FROM (SELECT no,cno,"
+					+ "nvl(recipegettitle(cno),'no'), "
+					+ "nvl(recipegetPoster(cno),'no'), "
+					+ "nvl(recipegetchef(cno),'no'), "
+					+ "nvl(foodgettitle(cno),'no'),"
+					+ "nvl(foodgetposter(cno),'no'),"
+					+ "nvl(foodgettel(cno),'no'), "
+					+ "nvl(productgettitle(cno),'no'),"
+					+ "nvl(productgetposter(cno),'no'),"
+					+ "nvl(productgetprice(cno),'no'),"
+					+ "nvl(sharegettitle(cno),'no'),"
+					+ "nvl(sharegetposter(cno),'no'),"
+					+ "nvl(sharegetprice(cno),'no'),rownum as num "
+					+ "FROM (SELECT no,cno,"
+					+ "nvl(recipegettitle(cno),'no'), "
+					+ "nvl(recipegetPoster(cno),'no'), "
+					+ "nvl(recipegetchef(cno),'no'), "
+					+ "nvl(foodgettitle(cno),'no'),"
+					+ "nvl(foodgetposter(cno),'no'),"
+					+ "nvl(foodgettel(cno),'no'), "
+					+ "nvl(productgettitle(cno),'no'),"
+					+ "nvl(productgetposter(cno),'no'),"
+					+ "nvl(productgetprice(cno),'no'),"
+					+ "nvl(sharegettitle(cno),'no'),"
+					+ "nvl(sharegetposter(cno),'no'),"
 					+ "nvl(sharegetprice(cno),'no') "
-					+ "FROM jjim "
-					+ "where id=? and type=? "
+					+ "FROM JJIM where id=? and type=?)) "
+					+ "WHERE NUM BETWEEN ? AND ? "
 					+ "order by no desc";
 			ps = conn.prepareStatement(sql);
+			int rowSize=10;
+			int start=(rowSize*page)-(rowSize-1);
+			int end= rowSize*page;
 			ps.setString(1, id);
 			ps.setInt(2, type);
+			ps.setInt(3, start);
+			ps.setInt(4, end);
 			ResultSet rs =ps.executeQuery();
 			while(rs.next()) {
 				JjimVO vo = new JjimVO();
@@ -124,11 +167,11 @@ public class JjimDAO {
 					vo.setPoster(rs.getString(10));
 					vo.setPrice(rs.getString(11));
 				}
-				else {
+				else if(type == 4){
 					vo.setTitle(rs.getString(12));
-					String poster = rs.getString(13);
-					poster=poster.substring(0,poster.indexOf("^"));
-					poster = poster.replace("#","&");
+				String poster = rs.getString(13);
+//					poster=poster.substring(0,poster.indexOf("^"));
+				poster = poster.replace("#","&");
 					vo.setPoster(poster);
 					vo.setPrice(rs.getString(14));
 				}
@@ -149,6 +192,30 @@ public class JjimDAO {
 			db.disConnection(conn, ps);
 		}
 		return list;
+	}
+	public int jjimTotalPage(String id,int type)
+	{
+		int total=0;
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT CEIL(COUNT(*)/10.0) FROM JJIM WHERE id=? and type=? ";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setInt(2, type);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			total=rs.getInt(1);
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return total;
 	}
 	// 찜 취소
 	public void JjimCancel(int no) {
