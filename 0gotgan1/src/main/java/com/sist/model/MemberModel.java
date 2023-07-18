@@ -147,28 +147,59 @@ public String memberJoinOk(HttpServletRequest request,HttpServletResponse respon
 	 session.invalidate(); // 세션 끊기
 	 return "redirect:../jsp/main.do"; //화면 돌려주기
  }
- @RequestMapping("member/emailcheck_ok.do")
- public void memberEmailCheck(HttpServletRequest request, HttpServletResponse response)
- 	{
+
+ // 아이디 찾기
+ @RequestMapping("member/findid.do")
+ public String findId(HttpServletRequest request,HttpServletResponse response)
+ {
+	 request.setAttribute("main_jsp", "../member/findid.jsp");
+	 return "../jsp/main.jsp";
+ }
+ @RequestMapping("member/findid_ok.do")
+ public void findIdOk(HttpServletRequest request,HttpServletResponse response)
+ {
+	 try
+	 {
+		 request.setCharacterEncoding("UTF-8");
+	 }catch(Exception ex) {}
+	 String name=request.getParameter("name");
 	 String email=request.getParameter("email");
+	 
 	 MemberDAO dao=MemberDAO.newInstance();
-		int count=dao.memberEmailCheck(email);
-		try
-		{
-			PrintWriter out=response.getWriter(); //메모리에 저장
-			out.println(count); // ajax result에 보낸다 
-		}catch(Exception ex) {}
- 	}
- @RequestMapping("member/phonecheck_ok.do")
- public void memberPhoneCheck(HttpServletRequest request, HttpServletResponse response)
-	{
-	 String phone=request.getParameter("phone");
+	 String res=dao.findId(name, email);
+	 try
+	 {
+		 PrintWriter out=response.getWriter();
+		 out.println(res);
+	 }catch(Exception ex) {}
+ }
+ // 비밀번호 찾기
+ 
+ @RequestMapping("member/findpwd.do")
+ public String findPasswordAction(HttpServletRequest request,HttpServletResponse response)
+ {
+	 request.setAttribute("main_jsp", "../member/findpwd.jsp");
+	 return "../jsp/main.jsp";
+ }
+ @RequestMapping("member/findpwd_ok.do")
+ public void findPwdOk(HttpServletRequest request,HttpServletResponse response)
+ {
+	 try
+	 {
+		 request.setCharacterEncoding("UTF-8");
+	 }catch(Exception ex) {}
+	 String name=request.getParameter("name");
+	 String id=request.getParameter("id");
+	 String email=request.getParameter("email");
+	 
 	 MemberDAO dao=MemberDAO.newInstance();
-		int count=dao.memberPhoneCheck(phone);
-		try
-		{
-			PrintWriter out=response.getWriter(); //메모리에 저장
-			out.println(count); // ajax result에 보낸다 
-		}catch(Exception ex) {}
-	}
+	 
+	 String res=dao.findPwd(name, id, email);
+	 
+	 try
+	 {
+		 PrintWriter out=response.getWriter();
+		 out.println(res);
+	 }catch(Exception ex) {}
+ }
 }

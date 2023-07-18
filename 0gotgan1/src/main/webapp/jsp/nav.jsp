@@ -193,7 +193,7 @@ $(function(){
                    </c:if>
                     <c:if test="${sessionScope.id!=null }">
                     <li class="nav-item">
-                    <li>⒰${sessionScope.name }${sessionScope.admin=='y'?"(관리자)":"" }님</li>&nbsp;
+                    <li>${sessionScope.name }${sessionScope.admin=='y'?"(관리자)":"" }님</li>&nbsp;
                     
      	                   <li><input type=button value="로그아웃" style="background-color:#0B4C5F; border-radius:15px;" class="btn btn-danger mt-1 btn-sm"  id="logoutBtn" onclick="logout()"></li>
      	             <c:if test="${sessionScope.admin!='y' }">    

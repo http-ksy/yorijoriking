@@ -177,94 +177,90 @@
   }
 }
 </style>
-<script type="text/javascript">
-function log(){
-	$('#logBtn').click(function(){
-		// 유효성 검사 => 반드시 입력
-		let id=$('#id').val();
-		if(id.trim()=="")
-			{
-				$('#id').focus();
-				return;
-			}
-		let pwd=$('#pwd').val();
-		if(pwd.trim()=="")
-		{
-			$('#pwd').focus();
-			return;
-		}
-		
-		// 전송 => 실행결과를 가지고 온다 (자체 처리) (요청 = 응답 : Ajax,Vue,React)
-		$.ajax({
-			type:'post',
-			url:'../member/login_ok.do',
-			data:{"id":id,"pwd":pwd},
-			success:function(result) //NOID,NOPWD,OK
-			{
-				let res=result.trim();
-				if(res==='NOID')
-				{
-					alert("아이디가 존재하지 않습니다!");
-					$('#id').val("");
-					$('#pwd').val("");
-					$('#id').focus();
-				}
-				else if(res==='NOPWD')
-				{
-					alert("비밀번호가 틀립니다!")
-					$('#pwd').val("");
-					$('#pwd').focus();
-				}
-				else 
-				{
-					location.href="../jsp/main.do"
-				}
-			}
-		})
-	})
-}
+<script src="http://code.jquery.com/jquery.js"></script>
+<script>
+$( function() {
+	  $('#findidBtn').click(function(){
+		  let name=$('#name').val();
+		  if(name.trim()==="")
+		  {
+			  $('#name').focus();
+			  return;
+		  }
+		  
+		  let email=$('#email').val();
+		  if(email.trim()==="")
+		  {
+			  $('#email').focus();
+			  return;
+		  }
+		  $.ajax({
+			  type:'post',
+			  url:'../member/findid_ok.do',
+			  data:{"name":name,"email":email},
+			  success:function(result)
+			  {
+				  let res=result.trim()
+				  if(res==='NO')
+				  {
+					  $('#id_email').html('<span style="color:red">이름이나 이메일이 존재하지 않습니다<span>');
+				  }
+				  else
+				  {
+					  $('#id_email').html('<span style="color:blue">'+res+'</span>');
+				  }	  
+			  }
+		  })
+	  })
+	});
 </script>
 </head>
 <body>
 <div class="row" style="padding-top: 30px">
-<div class="login-box">
-  <h2>LOGIN</h2>
-	<form>
-    <div class="user-box">
-      <input type="text" name="id" id="id" required="required">
-      <label>아이디</label>
-    </div>
-    <div class="user-box">
-      <input type="password" name="pwd" id="pwd" required="required">
-      <label>비밀번호</label>
-    </div>
+  <div class="login-box">
+    <h2>아이디 찾기</h2>
+    <form class="form-horizontal">
+      <div class="user-box">
+        <input type="text" id="name" placeholder="이름" required="required">
+        <label>이름</label>
+      </div>
+      <div class="user-box">
+        <input type="email" id="email" placeholder="이메일" required="required">
+        <label>이메일</label>
+      </div>
+      <div class="user-box">
+        <h3 id="id_email"></h3>
+      </div>
       <div class="text-center">
-        <a href="javascript:void(0);" id="logBtn" onclick="log()"> 
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          로그인
+        <a href="javascript:void(0);" id="findidBtn"> 
+      	  <span></span>
+      	  <span></span>
+      	  <span></span>
+      	  <span></span>
+     	  아이디 찾기
 	    </a>
-	  </div>
-    <div class="text-center">
-      <a href="../member/findid.do">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        아이디 찾기
-	  </a>
-      <a href="../member/findpwd.do"> 
-       <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        비밀번호 찾기
-	  </a>
+      </div>
+      
+      <div class="text-center">
+        <a href="../member/login.do"> 
+      	  <span></span>
+      	  <span></span>
+      	  <span></span>
+      	  <span></span>
+     	  로그인
+	    </a>
+	    <a href="../member/join.do"> 
+      	  <span></span>
+      	  <span></span>
+      	  <span></span>
+      	  <span></span>
+     	  회원가입
+	    </a>
+      </div>     
+    </form>
+    <div>
     </div>
-  </form>
-</div> 
+  </div>
 </div>
 </body>
 </html>

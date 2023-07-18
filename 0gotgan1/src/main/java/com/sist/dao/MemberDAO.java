@@ -223,22 +223,42 @@ public class MemberDAO {
 		}
 		return vo;
 	}
-	public int memberEmailCheck(String email)
+	// 아이디 찾기
+	public String findId(String name,String email) 
 	{
-		//@ .
-		
-		int count=0;
+		String result="";
 		try
 		{
-			conn=ps.getConnection();
-			String sql="SELECT COUNT(*) FROM project_member WHERE email=?";
+			conn=db.getConnection();
+			String sql="SELECT COUNT(*) FROM project_member "
+					+ "WHERE name=? AND email=?";
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, email);
+			ps.setString(1, name);
+			ps.setString(2, email);
+			
 			ResultSet rs=ps.executeQuery();
 			rs.next();
-			count=rs.getInt(1);
+			int count=rs.getInt(1);
+			// id=rs.getString("id");
 			rs.close();
 			
+			if(count==0) 
+			{
+				result="NO";
+			}
+			else
+			{
+				sql="SELECT RPAD(SUBSTR(id,1,2),LENGTH(id),'♬') "
+						+ "FROM project_member "
+						+ "WHERE name=? AND email=?";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, name);
+				ps.setString(2, email);
+				rs=ps.executeQuery();
+				rs.next();
+				result=rs.getString(1);
+				rs.close();
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -247,22 +267,44 @@ public class MemberDAO {
 		{
 			db.disConnection(conn, ps);
 		}
-		return count;
+		return result;
 	}
-	public int memberPhoneCheck(String phone)
+	// 비밀번호 찾기
+	public String findPwd(String name,String id,String email)
 	{
-		int count=0;
+		String result="";
 		try
 		{
-			conn=ps.getConnection();
-			String sql="SELECT COUNT(*) FROM project_member WHERE phone=?";
+			conn=db.getConnection();
+			String sql="SELECT COUNT(*) FROM project_member "
+					+ "WHERE name=? AND id=? AND email=?";
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, "010"+phone);
+			ps.setString(1, name);
+			ps.setString(2, id);
+			ps.setString(3, email);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
-			count=rs.getInt(1);
+			int count=rs.getInt(1);
 			rs.close();
 			
+			if(count==0)
+			{
+				result="NO";
+			}
+			else
+			{
+				sql="SELECT RPAD(SUBSTR(pwd,1,2),LENGTH(pwd),'*') "
+						+ "FROM project_member "
+						+ "WHERE name=? AND id=? AND email=?";
+				ps=conn.prepareStatement(sql);
+				ps.setString(1, name);
+				ps.setString(2, id);
+				ps.setString(3, email);
+				rs=ps.executeQuery();
+				rs.next();
+				result=rs.getString(1);
+				rs.close();
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -271,6 +313,6 @@ public class MemberDAO {
 		{
 			db.disConnection(conn, ps);
 		}
-		return count;
+		return result;
 	}
 }
