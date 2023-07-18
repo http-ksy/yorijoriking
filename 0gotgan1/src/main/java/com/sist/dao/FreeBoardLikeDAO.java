@@ -30,7 +30,7 @@ public class FreeBoardLikeDAO {
 			ps.setString(1, vo.getId());
 			ps.setInt(2, vo.getBno());
 			ps.executeUpdate();
-			
+//			int a=1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
