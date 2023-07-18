@@ -1,6 +1,7 @@
 package com.sist.model;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.MemberVO;
+import com.sist.vo.ReserveFoodVO;
+import com.sist.vo.ReserveShareVO;
 public class MyPageModel {
 	@RequestMapping("my/mypage.do")
 	public String my_page(HttpServletRequest request, HttpServletResponse response) {
@@ -99,4 +102,29 @@ public class MyPageModel {
 		session.invalidate();
 		return "redirect:../jsp/main.do";
 	} // 자동으로 로그아웃까지 돼야하는데 안댐
+	//예약
+	@RequestMapping("my/mypage_reserve.do")
+	public String mypage_reserve(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session=request.getSession();
+		String fid=(String)session.getAttribute("id");
+		ReserveDAO dao=ReserveDAO.newInstance();
+		List<ReserveFoodVO> list=dao.reserveFoodInfoData(fid);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("jsp", "../my/mypage_reserve.jsp");
+		request.setAttribute("main_jsp", "../my/mypage.jsp");
+		return "../jsp/main.jsp";
+	}
+	@RequestMapping("my/mypage_reserve1.do")
+	public String mypage_sreserve(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session=request.getSession();
+		String sid=(String)session.getAttribute("id");
+		ReserveDAO dao=ReserveDAO.newInstance();
+		List<ReserveShareVO> list=dao.reserveShareInfoData(sid);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("jsp", "../my/mypage_reserve1.jsp");
+		request.setAttribute("main_jsp", "../my/mypage.jsp");
+		return "../jsp/main.jsp";
+	}
 }

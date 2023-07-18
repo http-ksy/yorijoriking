@@ -3,49 +3,58 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>Insert title here</title>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	let i=0;
+		$('#reservebtn').click(function(){
+			let skdno=$(this).attr("data-no");
+			$('#s_skdno').val(skdno);
+			$('#sreserve').hide();
+			if(i===0){
+				$.ajax({
+					type:'post',
+					url:'diary.do',
+					data:{"skdno":skdno},
+					success:function(result){
+						$('#sreserve_day').html(result);
+					}
+				})
+				$(this).text("취소");
+				$('#sreserve').show();
+				i=1;
+				
+			}else if(i===1){
+				$(this).text("예약");
+				$('#sreserve').hide();
+				i=0;
+			}
+		})
+	})
+</script>
+</head>
 </head>
 
 <body>
 
 <!-- Page Header -->
-
     <header class="page-header page-header-mini">
-
         <h1 class="title">${svo.title }</h1>
-
         <ol class="breadcrumb pb-0">
-
             <li class="breadcrumb-item">${svo.sub_title }</a></li>
-
         </ol>
-
     </header>
-
     <!-- End Of Page Header -->
-
-
-
     <section class="container">
-
         <div class="page-container">
-
             <div class="page-content">
-
                 <div class="card">
-
                     <div class="card-header pt-0">
-
                         <div class="blog-media mb-4">
-
                             <img src="${svo.poster }" alt="" class="w-100">
 
                         </div>  
@@ -114,8 +123,82 @@
 
                     </div>
 					<div class="text-center">
-					<a class="btn  b1" style="width: 150px" href="javascript:history.back()">목록으로</a> 
+					<a class="btn  b1" style="width: 150px" href="javascript:history.back()">목록으로</a>
+					<a  class="btn  b1 rrr" id="reservebtn"  style="width: 150px" data-no="${svo.skdno }">예약하기</a> 
 					</div>
+					<div class="container" style="display:none" id="sreserve">
+    				   <table class="table" height=700>
+      						<tr>
+								<td width="65%" height="600" class="danger">
+									<table class="table">
+										<thead><h3>예약일 정보</h3></thead>
+										<tr>
+											<td id="sreserve_day"></td>
+										</tr>
+									</table>
+								</td>
+								<td width="35%" rowspan="1" class="info">
+									<table class="table">
+										<thead><h3>예약 정보</h3></thead>
+										<tr>
+											<td colspan="2" class="text-center">
+												<img src="${svo.poster }" style="width: 200px; height: 220px" id="reserve_img">
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<h4 id="reserve_name">${svo.title }</h4>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span style="color:gray; display: none;" id="sd">예약일 : </span><span id="share_day"></span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span style="color:gray; display: none;" id="st">예약시간 : </span><span id="share_t"></span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span style="color:gray; display: none;" id="si">예약인원 : </span><span id="share_i"></span>
+											</td>
+										</tr>
+										<tr id="sok" style="display: none;">
+											<td colspan="2" class="text-center">
+											<form method="post" action="../share/reserve_ok.do">
+												<input type="hidden" name="skdno" id="s_skdno">
+												<input type="hidden" name="srday" id="s_day">
+												<input type="hidden" name="srtime" id="s_time">
+												<input type="hidden" name="sinwon" id="s_inwon">
+												<input type="submit" value="예약" class="btn btn-lg btn-primary">
+											</form>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width="25%" height="120" class="warning">
+										<table class="table">
+											<thead><h3>예약 시간정보</h3></thead>
+											<tr>
+												<td id="share_time"></td>
+											</tr>
+										</table>
+									</td>
+								<td width="25%" height="120" class="default">
+									<table class="table">
+										<thead><h3>인원 정보</h3></thead>
+										<tr>
+											<td id="share_inwon"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+    					</table>
+    				  </div>
                     <div class="card-footer">
 
                          <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Comments 4</a></h6>

@@ -19,6 +19,7 @@
  $(function(){
 	 $('#reservebtn').click(function(){
 		 let fdno=$(this).attr("data-no");
+		 $('#r_fdno').val(fdno);
 		 if(i===0){ 
 			 $('#reserve_window').show();
 			 $('.rrr').text('캔슬')
@@ -252,78 +253,76 @@
     				 <!-- res -->
     				  <div class="container" style="display:none" id="reserve_window">
     				   <table class="table" height=700>
-      <tr>
-        <td width=55% height="580" class="success">
-         <table class="table">
-           <caption><h3>예약일 정보</h3></caption>
-           <tr>
-            <td id="reserve_day"></td>
-           </tr>
-          </table>
-        </td>
-        <td width=45% class="info">
-          <table class="table">
-           <caption><h3>예약 정보</h3></caption>
-           <tr>
-             <td colspan="2" class="text-center">
-              <img src="${posters[0] }" style="width: 200px;height: 220px" id="food_img">
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <h4>가게명:${vo.title }</h4>
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="fd">예약일:<span id="food_day"></span></span>
-             </td>
-           </tr>
-           <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="ft">예약시간:<span id="food_t"></span></span>
-             </td>
-           </tr>
-            <tr>
-             <td colspan="2">
-              <span style="color:gray;display:none" id="fi">예약	인원:<span id="food_i"></span></span>
-             </td>
-           </tr>
-           <tr id="ok" style="display:none">
-             <td colspan="2" class="text-center" >
-             <form method="post" action="../reserve/reserve_ok.do">
-              <input type=hidden name="fno" id="r_fno"/>
-              <input type=hidden name="rday"  id="r_day"/>
-              <input type=hidden name="rtime" id="r_time"/>
-              <input type=hidden name="inwon" id="r_inwon"/>
-               <input type=submit value="예약" class="btn btn-lg btn-primary">
-               </form>
-             </td>
-           </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <td width=35% height="120" class="warning">
-          <table class="table">
-           <thead> <h3>예약시간</h3>
-           <tr>
-             <td id="food_time"></td>
-           </tr>
-           </thead>
-          </table>
-        </td>
-        <td width=30% height="120" class="default">
-          <table class="table">
-            <thead> <h3>예약시간</h3>
-           <tr>
-             <td id="food_inwon"></td>
-           </tr>
-          </thead>
-          </table>
-        </td>
-      </tr>
-    </table>
+      						<tr>
+								<td width="65%" height="600" class="danger">
+									<table class="table">
+										<thead><h3>예약일 정보</h3></thead>
+										<tr>
+											<td id="reserve_day"></td>
+										</tr>
+									</table>
+								</td>
+								<td width="35%" rowspan="1" class="info">
+									<table class="table">
+										<thead><h3>예약 정보</h3></thead>
+										<tr>
+											<td colspan="2" class="text-center">
+												<img src="${vo.poster }" style="width: 200px; height: 220px" id="reserve_img">
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<h4 id="reserve_name">${vo.title }</h4>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span style="color:gray; display: none;" id="fd">예약일 : </span><span id="food_day"></span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span style="color:gray; display: none;" id="ft">예약시간 : </span><span id="food_t"></span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<span style="color:gray; display: none;" id="fi">예약인원 : </span><span id="food_i"></span>
+											</td>
+										</tr>
+										<tr id="ok" style="display: none;">
+											<td colspan="2" class="text-center">
+											<form method="post" action="../food/reserve_ok.do">
+												<input type="hidden" name="fdno" id="r_fdno">
+												<input type="hidden" name="frday" id="r_day">
+												<input type="hidden" name="frtime" id="r_time">
+												<input type="hidden" name="finwon" id="r_inwon">
+												<input type="submit" value="예약" class="btn btn-lg btn-primary">
+											</form>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width="25%" height="120" class="warning">
+										<table class="table">
+											<thead><h3>예약 시간정보</h3></thead>
+											<tr>
+												<td id="food_time"></td>
+											</tr>
+										</table>
+									</td>
+								<td width="25%" height="120" class="default">
+									<table class="table">
+										<thead><h3>인원 정보</h3></thead>
+										<tr>
+											<td id="food_inwon"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+    						</table>
     				  
     				  </div>
     				 <!-- end 예약 -->

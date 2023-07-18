@@ -70,7 +70,7 @@
 	 	 	   <td class="text-center"><a href="mypage.do?mode=5" style="color:black">구매현황</a></td>
 	 	 	  </tr>
 	 	 	   <tr height="35">
-	 	 	   <td class="text-center"><a href="mypage.do?mode=6" style="color:black">예약현황</a></td>
+	 	 	   <td class="text-center"><a href="../my/mypage_reserve.do" style="color:black">예약현황</a></td>
 	 	 	  </tr>
 	 	 	   <tr height="35">
 	 	 	   <td class="text-center"><a href="mypage.do?mode=7" style="color:black">문의하기</a></td>
@@ -91,7 +91,7 @@
 	 	 	  <jsp:include page="${jsp}"></jsp:include>
 	 	 	</div>
 	 	 	<div class="row">
-	 	  	<h1>뭔가 비어있어서 써야할거 같으면서도 별로 필요없어서 안써도 될꺼 같은데 뭔가 뭔가인 곳</h1>
+	 	  	
 	 	  </div>
     </section>
 </div>

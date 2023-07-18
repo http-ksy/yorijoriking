@@ -2,9 +2,16 @@ package com.sist.vo;
 
 public class FoodVO {
 private int fdno,hit;
-private String title,poster,address,tel,type,price,parking,menu,rday,time;
+private String title,poster,address,tel,type,price,parking,menu,rday,time,reserve_day;
 private Double score;
 
+
+public String getReserve_day() {
+	return reserve_day;
+}
+public void setReserve_day(String reserve_day) {
+	this.reserve_day = reserve_day;
+}
 public int getHit() {
 	return hit;
 }

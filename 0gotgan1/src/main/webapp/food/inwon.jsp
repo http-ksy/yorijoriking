@@ -8,21 +8,21 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
-$(function (){
+$(function(){
 	$('.inwons').click(function(){
-		let inwon=$(this).text(); // 태그 태그 사이 텍스트 인풋 밸류 val
+		let inwon=$(this).text();
 		$('#fi').show();
 		$('#food_i').text(inwon);
 		$('#r_inwon').val(inwon);
-		$('#ok').show()
+		$('#ok').show();
 	})
 })
 </script>
 </head>
 <body>
- <c:forEach var="i" begin="1" end="10">
- 	<span class="btn btn-xs btn-success inwons">${i }명</span>
- </c:forEach>
- 	<span class="btn btn-xs btn-success inwons">단체</span>
+	<c:forEach var="i" begin="1" end="10">
+		<span style="font-size:15px; margin:5px 5px; padding:8px 14px" class="btn btn-xs btn-success inwons">${i }명</span>
+	</c:forEach>
+		<span style="font-size:15px; padding:8px 45px" class="btn btn-xs btn-success inwons">단체</span>
 </body>
 </html>

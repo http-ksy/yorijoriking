@@ -8,6 +8,8 @@ import com.sist.dao.*;
 import com.sist.vo.FreeBoardVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.ProductVO;
+import com.sist.vo.ReserveFoodVO;
+import com.sist.vo.ReserveShareVO;
 
 import java.util.*;
 public class AdminModel {
@@ -211,5 +213,38 @@ public class AdminModel {
 		dao.adminBoardDelete(Integer.parseInt(bno));
 		
 		return "redirect: ../admin/board_manager.do";
+	}
+	//예약
+	@RequestMapping("admin/adminpage_reserve.do")
+	public String admin_food_reserve(HttpServletRequest request, HttpServletResponse response) {
+		ReserveDAO dao=ReserveDAO.newInstance();
+		List<ReserveFoodVO> list=dao.reserveFoodAdminData();
+		request.setAttribute("list", list);
+		request.setAttribute("jspp", "../admin/adminpage_reserve.jsp");
+		request.setAttribute("main_jsp", "../admin/adminpage.jsp");
+		return "../jsp/main.jsp";
+	}
+	@RequestMapping("admin/admin_reserve_ok.do")
+	public String admin_food_ok(HttpServletRequest request, HttpServletResponse response) {
+		String fno=request.getParameter("fno");
+		ReserveDAO dao=ReserveDAO.newInstance();
+		dao.reserveOk(Integer.parseInt(fno));
+		return "redirect:../admin/adminpage_reserve.do";
+	}
+	@RequestMapping("admin/adminpage_reserve1.do")
+	public String admin_share_reserve(HttpServletRequest request, HttpServletResponse response) {
+		ReserveDAO dao=ReserveDAO.newInstance();
+		List<ReserveShareVO> list=dao.reserveShareAdminData();
+		request.setAttribute("list", list);
+		request.setAttribute("jspp", "../admin/adminpage_reserve1.jsp");
+		request.setAttribute("main_jsp", "../admin/adminpage.jsp");
+		return "../jsp/main.jsp";
+	}
+	@RequestMapping("admin/admin_reserve_ok1.do")
+	public String admin_share_ok(HttpServletRequest request, HttpServletResponse response) {
+		String sno=request.getParameter("sno");
+		ReserveDAO dao=ReserveDAO.newInstance();
+		dao.sreserveOk(Integer.parseInt(sno));
+		return "redirect:../admin/adminpage_reserve1.do";
 	}
 }

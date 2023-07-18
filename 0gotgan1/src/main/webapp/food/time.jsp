@@ -14,11 +14,11 @@ $(function(){
 		$('#ft').show();
 		$('#food_t').text(time);
 		$('#r_time').val(time);
+		
 		$.ajax({
 			type:'post',
-			url:'inwon.do',
-			success:function(result)
-			{
+			url: 'inwon.do',
+			success:function(result){
 				$('#food_inwon').html(result);
 			}
 		})
@@ -27,8 +27,8 @@ $(function(){
 </script>
 </head>
 <body>
- <c:forEach var="time" items="${list }">
- 	<span class="btn btn-xs btn-danger times">${time }</span>
- </c:forEach>
+	<c:forEach var="time" items="${list }">
+		<span style="font-size: 15px; padding:8px 8px; margin: 3px 3px;" class="btn btn-xs btn-danger times">${time }</span>
+	</c:forEach>
 </body>
 </html>

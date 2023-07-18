@@ -64,7 +64,7 @@
 	 	 	   <td class="text-center"><a href="#" style="color:black">주문관리</a></td>
 	 	 	  </tr>
 	 	 	   <tr height="35">
-	 	 	   <td class="text-center"><a href="#" style="color:black">예약관리</a></td>
+	 	 	   <td class="text-center"><a href="../admin/adminpage_reserve.do" style="color:black">예약관리</a></td>
 	 	 	  </tr>
 	 	 	   <tr height="35">
 	 	 	   <td class="text-center"><a href="../admin/board_manager.do" style="color:black">게시글관리</a></td>
@@ -85,7 +85,6 @@
 	 	 	  <jsp:include page="${jspp}"></jsp:include>
 	 	 	</div>
 	 	 	<div class="row">
-	 	  	<h1>뭔가 비어있어서 써야할거 같으면서도 별로 필요없어서 안써도 될꺼 같은데 뭔가 뭔가인 곳</h1>
 	 	  </div>
     </section>
 </div>
