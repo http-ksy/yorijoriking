@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.FoodVO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.ShareVO;
 
 public class FoodModel {
@@ -96,6 +97,13 @@ public class FoodModel {
 	 request.setAttribute("clist", clist);
 	 request.setAttribute("fdno", fdno);
 	 request.setAttribute("main_jsp", "../food/foodDetail.jsp");
+	 
+	 String cno = request.getParameter("fdno");
+	    ReplyDAO rdao = ReplyDAO.newInstance();
+
+	    List<ReplyVO> list = rdao.replyListData(4, Integer.parseInt(cno));
+	    request.setAttribute("rList", list);
+	    
 	 return "../jsp/main.jsp";
  }
 }
