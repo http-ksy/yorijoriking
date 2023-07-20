@@ -61,7 +61,7 @@ function requestPay() {
 </head>
 <body>
 <h2 class="sectiontitle">${sessionScope.name }님의 장바구니 목록</h2>
-	<table class="table">
+	<table class="table" style="width: 1000px;">
 		<tr>
 			<th class="text-center">번호</th>
 			<th class="text-center"></th>

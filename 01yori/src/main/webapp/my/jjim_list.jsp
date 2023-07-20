@@ -7,7 +7,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.b1').click(function(){
+	$('.cancel').click(function(){
 		let no =$('.titleno').attr("data-no")
 		$.ajax({
 			 type:'post',
@@ -24,21 +24,18 @@ $(function(){
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-
   <div class="container">
   <h2 class="sectiontitle">${sessionScope.name }님의 찜 목록</h2>
-  <div class="text-right">
+  <div class="text-left">
     <a class="btn btn-xs " href="../jjim/jjim_list.do?type=1"  >레시피</a>
     <a class="btn btn-xs " href="../jjim/jjim_list.do?type=2"  >맛집</a>
     <a class="btn btn-xs " href="../jjim/jjim_list.do?type=3"  >스토어</a>
     <a class="btn btn-xs " href="../jjim/jjim_list.do?type=4"  >공유주방</a>
   </div>
   <hr>
-  <section>
-   <table class="table">
+   <table class="table" style="width: 1000px;">
    <tr>
    	<th class="text-center">번호</th>
    	<th class="text-center"></th>
@@ -59,7 +56,7 @@ $(function(){
    </tr>
    <c:forEach var="vo" items="${list}">
      <tr>
-    <td class="text-center titleno" data-no="${vo.no }">a</td>
+    <td class="text-center titleno" data-no="${vo.no }">${vo.no }</td>
     <c:if test="${type==1 }">
    	<td class="text-center">
    	<a href="../list/recipeDetail.do?rdno=${vo.cno }"><img src="${vo.poster }" style="width: 30px;height: 30px"></a>
@@ -97,12 +94,11 @@ $(function(){
    	<td class="text-center">${vo.price }</td>
     </c:if>
    		<td>
-   	   <a class="btn btn-xs b1">x</a>
+   	   <a class="btn btn-xs btn-success cancel">취소</a>
    		</td>
      </tr>
    </c:forEach>
    </table>
-   </section>
 <div class="text-center" style="margin-left:360px;">
 			<ul class="pagination">
   	 	  <c:if test="${startpage>1 }">
