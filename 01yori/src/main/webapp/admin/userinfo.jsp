@@ -42,20 +42,20 @@ $(function(){
        		</button>
        	</form>
 	</div>
-	<table class="table" style="width: 1400px"> <!-- 사이즈 보기 -->
-		<tr>
+	<table class="table" style="width: 1450px"> <!-- 사이즈 보기 -->
+		<tr  class="table-success">
 			<th>아이디</th>
 			<th>이름</th>
 			<th>닉네임</th>
 			<th>생년월일</th>
 			<th>이메일</th>
-			<th>성별</th>
+			<th style="width: 55px;">성별</th>
 			<th>우편번호</th>
 			<th>주소</th>
 			<th>상세 주소</th>
 			<th>전화번호</th>
 			<th></th>
-			<th></th>
+			<th ></th>
 		</tr>	
 		<c:forEach var="vo" items="${ulist }">
 		<tr>
@@ -70,8 +70,8 @@ $(function(){
 			<td>${vo.addr2 }</td>
 			<td>${vo.phone }</td>
 			
-			<td><span class="btn btn-xs btn-danger user_ups" data-no="${vo.id }" style="width: 70px">수정</span></td>
-			<td><a href="user_delete_ok.do?id=${vo.id }" class="btn btn-sm btn-danger">회원 삭제</a></td>
+			<td><span class="btn btn-xs btn-danger user_ups" data-no="${vo.id }" style="width: 70px;height: 42px;">수정</span></td>
+			<td><a href="user_delete_ok.do?id=${vo.id }" class="btn btn-sm btn-danger" style="width: 80px;height: 42px;">회원 삭제</a></td>
 		</tr>
 		<tr style="display: none" class="updates" id="u${vo.id }">
 			        <form method="post" action="userupdate_ok.do">

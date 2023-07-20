@@ -44,7 +44,7 @@ $(function(){
        	</form>
 	</div>
 <table class="table" style="width: 1400px;">
-           <tr>
+           <tr class="table-success">
                 <th width=10% >번호</th>
                 <th width=10% >제목</th>
                 <th width=10% >이름</th>
@@ -66,7 +66,7 @@ $(function(){
                 <td width=10% >${vo.hit }</td>
                 <td width=10% >${vo.suggest }</td>
                 <td><span class="btn btn-xs btn-danger admin_board_ups" data-no="${vo.bno }" style="width: 70px">수정</span></td>
-                <td><a href="admin_board_delete_ok.do?bno=${vo.bno }" class="btn btn-sm btn-danger">삭제</a></td>
+                <td><a href="admin_board_delete_ok.do?bno=${vo.bno }" class="btn btn-sm btn-danger" style="width: 70px">삭제</a></td>
             </tr>
             <tr style="display: none" class="updates" id="u${vo.bno }">
 			        <form method="post" action="board_update_ok.do">

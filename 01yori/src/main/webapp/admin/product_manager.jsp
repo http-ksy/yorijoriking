@@ -53,12 +53,12 @@ $(function(){
             <i class="fas fa-search"></i>
        		</button>
        	</form>
-	</div>
-	<div>
-		<a href="product_insert.do" class="btn btn-sm btn-danger">상품 추가</a>
-	</div>
+       	</div>
+       	<div class="text-right" style="width: 1400px;">
+       	<a href="product_insert.do" class="btn btn-sm btn-danger text-right">상품 추가</a>
+       	</div>
 	<table class="table" style="width: 1400px"> <!-- 사이즈 보기 -->
-		<tr>
+		<tr  class="table-success">
 			<th style="width: 60px">번호</th>
 			<th style="width: 200px">이름</th>
 			<th style="width: 30px"></th>

@@ -51,7 +51,7 @@ $(function(){
                 <th width=30% >내용</th>
                 <th width=10% >작성일</th>
                 <th width=10% >조회수</th>
-                <th width=10% >추천수1</th>
+                <th width=10% >추천수</th>
                 <th width=5% ></th>
                 <th width=5% ></th>
             </tr>

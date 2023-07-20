@@ -36,7 +36,7 @@ $(function(){
   </div>
   <hr>
    <table class="table" style="width: 1000px;">
-   <tr>
+   <tr class="table-success">
    	<th class="text-center">번호</th>
    	<th class="text-center"></th>
    	<th class="text-center">제목</th>

@@ -45,7 +45,7 @@
 <body >
     <div style="display: flex;">
     <aside class="aside-ads" style="background-color: red; position: fixed; display: flex;">
-         <div class="" style="background-color: #e6fbf6; margin-bottom: -60px; height: 500px; position: fixed; width: 250px;">
+         <div class="" style="background-color: #e6fbf6; margin-top: 100px; height: 360px; position: fixed; width: 200px;">
             <div class="container">
 	 	<div class="text-center"><br>
 	 		<h1>메뉴판</h1>
@@ -69,9 +69,7 @@
 	 	 	   <tr height="35">
 	 	 	   <td class="text-center"><a href="../my/mypage_reserve.do" style="color:black">예약현황</a></td>
 	 	 	  </tr>
-	 	 	   <tr height="35">
-	 	 	   <td class="text-center"><a href="mypage.do?mode=7" style="color:black">문의하기</a></td>
-	 	 	  </tr>
+	 	 	   
 	 	 	  </table>
 	 	 	</div>
 	 	 </div>

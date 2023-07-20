@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<jsp:useBean id="now" class="java.util.Date" />
+
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 <!DOCTYPE html> 
 <html>  
 <head>
@@ -33,16 +38,41 @@ $(function() {
 </script>
 </head>
 <body>
-<div>
-<ul class="a">
-  <li><a class="ll" href="../board/list.do?cno=0">전체</a></li>
-  <li><a class="ll" href="../board/list.do?cno=1">자유</a></li>
-  <li><a class="ll" href="../board/list.do?cno=3">레시피</a></li>
-  <li><a class="ll" href="../board/list.do?cno=4">스토어</a></li>
-  <li><a class="ll" href="../board/list.do?cno=5">공유주방</a></li>
-</ul>
-</div>
+<!-- <div> -->
 
+<!-- <ul class="a"> -->
+<!--   <li><a class="ll" href="../board/list.do?cno=0">전체</a></li> -->
+<!--   <li><a class="ll" href="../board/list.do?cno=1">자유</a></li> -->
+<!--   <li><a class="ll" href="../board/list.do?cno=3">레시피</a></li> -->
+<!--   <li><a class="ll" href="../board/list.do?cno=4">스토어</a></li> -->
+<!--   <li><a class="ll" href="../board/list.do?cno=5">공유주방</a></li> -->
+<!-- </ul> -->
+<!-- </div> -->
+
+   <div style="display: flex;">
+    <aside class="aside-ads" style="background-color: red; position: fixed; display: flex;">
+         <div class="" style="background-color: #e6fbf6; margin-top: 100px; height: 410px; position: fixed; width: 200px;">
+            <div class="container">
+	 	<div class="text-center"><br>
+	 		<h1>메뉴판</h1>
+	 	</div>
+	 	 <div class="navbar-nav">
+	 	 	<div class="nav-item">
+	 	 	  <div style="height: 30px"></div>
+	 	 	  <table class="table" >
+	 	 	    <tr><td><a class="ll" href="../board/list.do?cno=0">전체</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=1">자유</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=3">레시피</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=4">스토어</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=5">공유주방</a></td></tr>
+	 	 	  </table>
+	 	 	</div>
+	 	 </div>
+	 	  
+	</div>
+        </div>
+    </aside>
+</div>
     <div class="wrapper row3">
     <main class="container clear">
      <table class = "table"> 
@@ -110,18 +140,37 @@ $(function() {
             </tr>
 
             <c:forEach var="vo" items="${list}">
+
             <tr class="table">
+
                 <td width=10% class="text-center">${vo.bno }</td>
-                <c:if test="${today==vo.dbday }">
-                  <sup><img src="../board/image/new.gif"></sup>
-                </c:if>
-                <td width=20%><a href="../board/board_detail.do?bno=${vo.bno}">${vo.subject }</a></td>
+
+                <td width=20%><a href="../board/board_detail.do?bno=${vo.bno}">            
+
+                ${vo.subject }
+
+                <c:if test="${today== vo.dbday}">
+
+				<sup><img src="../board/image/new3.png"></sup>
+
+				</c:if>
+
+                </a>
+
+                </td>
+
                 <td width=10% class="text-center">${vo.name }</td>
+
                <%-- <c:if test=""></c:if> --%>
+
                 <td width=10% class="text-center">${vo.dbday }</td>
+
                 <td width=10% class="text-center">${vo.hit }</td>
+
                 <td width=10% class="text-center">${vo.suggest }</td>
+
             </tr>
+
             </c:forEach>
         </table>
     </main>

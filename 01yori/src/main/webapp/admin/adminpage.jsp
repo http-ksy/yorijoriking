@@ -1,41 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 
-<%--
- 	String mode=request.getParameter("mode");
- 	if(mode==null)
- 		mode="1";
- 	String jsp="";
- 	int index=Integer.parseInt(mode);
- 	switch(index)
- 	{
- 	case 1:
- 		jsp="myinfo.jsp";
- 		break;
- 	case 2:
- 		jsp="response.jsp";
- 		break;
- 	case 3:
- 		jsp="application.jsp";
- 		break;
- 	case 4:
- 		jsp="pageContext.jsp";
- 		break;
- 	case 5:
- 		jsp="out.jsp";
- 		break;
- 	case 6:
- 		jsp="etc.jsp";
- 		break;
- 	case 7:
- 		jsp="session.jsp";
- 		break;
- 	case 8:
- 		jsp="action.jsp";
- 		break;
- 		
- 	}
- --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +11,7 @@
 <body >
     <div style="display: flex;">
     <aside class="aside-ads" style="background-color: red; position: fixed; display: flex;">
-         <div class="" style="background-color: #e6fbf6; margin-bottom: -60px; height: 500px; position: fixed; width: 250px;">
+         <div class="" style="background-color: #e6fbf6; margin-top: 100px; height: 410px; position: fixed; width: 200px;">
             <div class="container">
 	 	<div class="text-center"><br>
 	 		<h1>¸Þ´ºÆÇ</h1>

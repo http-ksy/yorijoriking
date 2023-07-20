@@ -26,43 +26,43 @@ $(function(){
 	</div>
 	<table class="table"> <!-- 사이즈 보기 -->
 		<tr>
-			<th>아이디</th>
+			<th class="table-success">아이디</th>
 			<td >${vo.id }</td>
 		</tr>	
-		<tr>
-			<th>이름</th>
+		<tr >
+			<th class="table-success">이름</th>
 			<td>${vo.name }</td>
 		</tr>
 		<tr>
-			<th>닉네임</th>
+			<th class="table-success">닉네임</th>
 			<td>${vo.nickname }</td>
 		</tr>	
 		<tr>
-			<th>생년월일</th>
+			<th class="table-success">생년월일</th>
 			<td>${vo.birthday }</td>
 		</tr>		
 		<tr>
-			<th>이메일</th>
+			<th class="table-success">이메일</th>
 			<td>${vo.email }</td>
 		</tr>	
 		<tr>
-			<th>성별</th>
+			<th class="table-success">성별</th>
 			<td>${vo.sex }</td>
 		</tr>	
 		<tr>
-			<th>우편번호</th>
+			<th class="table-success">우편번호</th>
 			<td>${vo.post }</td>
 		</tr>	
 		<tr>
-			<th>주소</th>
+			<th class="table-success">주소</th>
 			<td>${vo.addr1 }</td>
 		</tr>
 		<tr>
-			<th>주소</th>
+			<th class="table-success">주소</th>
 			<td>${vo.addr2 }</td>
 		</tr>	
 		<tr>
-			<th>전화번호</th>
+			<th class="table-success">전화번호</th>
 			<td>${vo.phone }</td>
 		</tr>		
 	</table>
