@@ -26,6 +26,17 @@ $(function(){
 			u=0;
 		}
 	})
+	
+		$('#findcate').click(function (){
+		let fd = $('#fd').val();
+	if(fd.trim()===""){
+		$('#fd').focus();
+		alert("검색어를 입력하세요")
+		return
+	}
+	else{
+		$('#findfrm').submit();
+	}
 })
 </script>
 </head>
@@ -35,7 +46,7 @@ $(function(){
 	
 	</div>
 	<div>
-		<form class="d-flex tm-search-form" id="findfrm" method="post" action="../admin/find.do">
+		<form class="d-flex tm-search-form" id="findfrm" method="post" action="../admin/product_manager.do">
          	<input id="fd" class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" style="width:70%;" value="${fd }" name="fd">
            	<button class="btn btn-outline-success tm-search-btn" type="submit"style="width:30%" id="findcate">검색
             <input id="cate1" type="hidden" value="product" name="cate">
@@ -119,20 +130,20 @@ $(function(){
          <nav id="pagination" aria-label="Page navigation" style="margin-left:600px;">
 	            <ul class="pagination justify-content-center">
 		 			<c:if test="${pcurpage>1 }">
-		            <li class="page-item"><a class="page-link" href="product_manager.do?&page=${pcurpage>1?pcurpage-1:pcurpage }">Previous</a></li>
+		            <li class="page-item"><a class="page-link" href="product_manager.do?&fd=${fd}&page=${pcurpage>1?pcurpage-1:pcurpage }">Previous</a></li>
 					</c:if>
 					
 		             <c:forEach var="i" begin="${pstartpage }" end="${pendpage }">
 		             	<c:if test="${i==pcurpage }">
-		             	<li class="page-item"><a class="active" class="active" href="product_manager.do?page=${i }">${i }</a></li>
+		             	<li class="page-item"><a class="active" class="active" href="product_manager.do?fd=${fd}&page=${i }">${i }</a></li>
 		             	</c:if>
 		             	<c:if test="${i!=pcurpage }">
-		             	<li class="page-item"><a class="page-link" class="active" href="product_manager.do?page=${i }">${i }</a></li>
+		             	<li class="page-item"><a class="page-link" class="active" href="product_manager.do?fd=${fd}&page=${i }">${i }</a></li>
 		             	</c:if>
 		             </c:forEach> 
 		             
 	                <c:if test="${pcurpage<ptotalpage }">
-	                <li class="page-item"><a class="page-link" href="product_manager.do?page=${pcurpage<ptotalpage?pcurpage+1:pcurpage }">Next</a></li>
+	                <li class="page-item"><a class="page-link" href="product_manager.do?fd=${fd}&page=${pcurpage<ptotalpage?pcurpage+1:pcurpage }">Next</a></li>
 	              </c:if>
 	            </ul>
 	        </nav>

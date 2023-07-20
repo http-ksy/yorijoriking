@@ -34,7 +34,7 @@ $(function(){
 	<h1>유저정보 보기</h1>
 	</div>
 	<div>
-		<form class="d-flex tm-search-form" id="findfrm" method="post" action="../admin/find.do">
+		<form class="d-flex tm-search-form" id="findfrm" method="post" action="../admin/userinfo.do">
          	<input id="fd" class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" style="width:70%;" value="${fd }" name="fd">
            	<button class="btn btn-outline-success tm-search-btn" type="submit"style="width:30%" id="findcate">검색
             <input id="cate1" type="hidden" value="user" name="cate">
@@ -94,32 +94,32 @@ $(function(){
 		</c:forEach>
 	</table>
 	
-<!-- 	<div class="container"> -->
-<!--       <div class="row"> -->
-<!--         <div class="justify-content-center"> -->
-<!--          <nav id="pagination" aria-label="Page navigation" style="margin-left:600px;"> -->
-<!-- 	            <ul class="pagination justify-content-center"> -->
-<%-- 		 			<c:if test="${ucurpage>1 }"> --%>
-<%-- 		            <li class="page-item"><a class="page-link" href="userinfo.do?&page=${ucurpage>1?ucurpage-1:ucurpage }">Previous</a></li> --%>
-<%-- 					</c:if> --%>
+	<div class="container">
+      <div class="row">
+        <div class="justify-content-center">
+         <nav id="pagination" aria-label="Page navigation" style="margin-left:600px;">
+	            <ul class="pagination justify-content-center">
+		 			<c:if test="${ucurpage>1 }">
+		            <li class="page-item"><a class="page-link" href="userinfo.do?fd=${fd }&page=${ucurpage>1?ucurpage-1:ucurpage }">Previous</a></li>
+					</c:if>
 					
-<%-- 		             <c:forEach var="i" begin="${ustartpage }" end="${uendpage }"> --%>
-<%-- 		             	<c:if test="${i==ucurpage }"> --%>
-<%-- 		             	<li class="page-item"><a class="active" class="active" href="userinfo.do?page=${i }">${i }</a></li> --%>
-<%-- 		             	</c:if> --%>
-<%-- 		             	<c:if test="${i!=ucurpage }"> --%>
-<%-- 		             	<li class="page-item"><a class="page-link" class="active" href="userinfo.do?page=${i }">${i }</a></li> --%>
-<%-- 		             	</c:if> --%>
-<%-- 		             </c:forEach>  --%>
+		             <c:forEach var="i" begin="${ustartpage }" end="${uendpage }">
+		             	<c:if test="${i==ucurpage }">
+		             	<li class="page-item"><a class="active" class="active" href="userinfo.do?fd=${fd }&page=${i }">${i }</a></li>
+		             	</c:if>
+		             	<c:if test="${i!=ucurpage }">
+		             	<li class="page-item"><a class="page-link" class="active" href="userinfo.do?fd=${fd }&page=${i }">${i }</a></li>
+		             	</c:if>
+		             </c:forEach> 
 		             
-<%-- 	                <c:if test="${ucurpage<utotalpage }"> --%>
-<%-- 	                <li class="page-item"><a class="page-link" href="userinfo.do?page=${ucurpage<utotalpage?ucurpage+1:ucurpage }">Next</a></li> --%>
-<%-- 	              </c:if> --%>
-<!-- 	            </ul> -->
-<!-- 	        </nav> -->
-<!--         </div> -->
+	                <c:if test="${uendpage<utotalpage }">
+	                <li class="page-item"><a class="page-link" href="userinfo.do?fd=${fd }&page=${ucurpage<utotalpage?ucurpage+1:ucurpage }">Next</a></li>
+	              </c:if>
+	            </ul>
+	        </nav>
+        </div>
 	   
-<!--     </div> -->
-<!--       </div> -->
+    </div>
+      </div>
 </body>
 </html>

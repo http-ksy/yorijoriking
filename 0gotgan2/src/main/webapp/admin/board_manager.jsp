@@ -35,7 +35,7 @@ $(function(){
 	
 </div>
 <div>
-		<form class="d-flex tm-search-form" id="findfrm" method="post" action="../admin/find.do">
+		<form class="d-flex tm-search-form" id="findfrm" method="post" action="../admin/board_manager.do">
          	<input id="fd" class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" style="width:70%;" value="${fd }" name="fd">
            	<button class="btn btn-outline-success tm-search-btn" type="submit"style="width:30%" id="findcate">검색
             <input id="cate1" type="hidden" value="board" name="cate">
@@ -90,20 +90,20 @@ $(function(){
          <nav id="pagination" aria-label="Page navigation" style="margin-left:600px;">
 	            <ul class="pagination justify-content-center">
 		 			<c:if test="${bcurpage>1 }">
-		            <li class="page-item"><a class="page-link" href="board_manager.do?page=${bcurpage>1?bcurpage-1:bcurpage }">Previous</a></li>
+		            <li class="page-item"><a class="page-link" href="board_manager.do?fd=${fd }&page=${bcurpage>1?bcurpage-1:bcurpage }">Previous</a></li>
 					</c:if>
 					
 		             <c:forEach var="i" begin="${bstartpage }" end="${bendpage }">
 		             	<c:if test="${i==bcurpage }">
-		             	<li class="page-item"><a class="active" class="active" href="board_manager.do?page=${i }">${i }</a></li>
+		             	<li class="page-item"><a class="active" class="active" href="board_manager.do?fd=${fd }&page=${i }">${i }</a></li>
 		             	</c:if>
 		             	<c:if test="${i!=bcurpage }">
-		             	<li class="page-item"><a class="page-link" class="active" href="board_manager.do?page=${i }">${i }</a></li>
+		             	<li class="page-item"><a class="page-link" class="active" href="board_manager.do?fd=${fd }&page=${i }">${i }</a></li>
 		             	</c:if>
 		             </c:forEach> 
 		             
 	                <c:if test="${bcurpage<btotalpage }">
-	                <li class="page-item"><a class="page-link" href="board_manager.do?page=${bcurpage<btotalpage?bcurpage+1:bcurpage }">Next</a></li>
+	                <li class="page-item"><a class="page-link" href="board_manager.do?fd=${fd }&page=${bcurpage<btotalpage?bcurpage+1:bcurpage }">Next</a></li>
 	              </c:if>
 	            </ul>
 	        </nav>

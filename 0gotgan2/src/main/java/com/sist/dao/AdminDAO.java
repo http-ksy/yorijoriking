@@ -8,6 +8,7 @@ import com.sist.common.CreateDataBase;
 import com.sist.vo.FreeBoardVO;
 import com.sist.vo.MemberVO;
 import com.sist.vo.ProductVO;
+import com.sist.vo.RecipeVO;
 
 import java.util.*;
 
@@ -22,17 +23,42 @@ public class AdminDAO {
 			dao=new AdminDAO();
 		return dao;
 	}
-//	public List<MemberVO> userInfo(int page)
-	public List<MemberVO> userInfo()
+	public List<MemberVO> userInfo(int page, String fd)
 	{
 		List<MemberVO> list=new ArrayList<MemberVO>();
 		try
 		{
 			conn=db.getConnection();
-			String sql="SELECT id,name,nickname,sex,birthday,email,post,addr1,addr2,phone "
-					+ "FROM project_member ";
-//					+ "WHERE BETWEEN ? AND ?";
-			ps=conn.prepareStatement(sql);
+			String sql="";
+			if(fd==null)
+			{
+				sql="SELECT id,name,nickname,sex,birthday,email,post,addr1,addr2,phone,num "
+					+ "(SELECT id,name,nickname,sex,birthday,email,post,addr1,addr2,phone,rownum as num "
+					+ "FROM project_member)"
+					+ "WHERE num BETWEEN ? AND ?";
+				ps=conn.prepareStatement(sql);
+				int rowSize=20;
+				int startPage=(rowSize*page)-(rowSize-1);
+				int endPage=rowSize*page;
+				ps.setInt(1, startPage);
+				ps.setInt(2, endPage);
+			}
+			else
+			{
+				sql= "SELECT id,name,nickname,sex,birthday,email,post,addr1,addr2,phone,num "
+						+ "FROM (SELECT id,name,nickname,sex,birthday,email,post,addr1,addr2,phone,rownum as num "
+						+ "FROM project_member WHERE id LIKE '%'||?||'%' or name LIKE '%'||?||'%')"
+						+ "WHERE num BETWEEN ? AND ?";
+				ps=conn.prepareStatement(sql);
+				int rowSize=20;
+				int startPage=(rowSize*page)-(rowSize-1);
+				int endPage=rowSize*page;
+				ps.setString(1, fd);
+				ps.setString(2, fd);
+				ps.setInt(3, startPage);
+				ps.setInt(4, endPage);
+			}
+			
 //			int rowSize = 20;
 //			int start = (rowSize*page)-(rowSize-1);
 //			int end = rowSize*page;
@@ -76,16 +102,18 @@ public class AdminDAO {
 		}
 		return list;
 	}
-	public int userinfoTotalPage()
+	public int userinfoTotalPage(String fd)
 	{
 		int totalpage=0;
 		try
 		{
 			conn=db.getConnection();
 			
-			String sql="SELECT CEIL(COUNT(*)/20.0) FROM project_member";	
+			String sql="SELECT CEIL(COUNT(*)/20.0) FROM project_member WHERE id LIKE '%'||?||'%' or name LIKE '%'||?||'%'";	
 			
 			ps=conn.prepareStatement(sql);
+			ps.setString(1, fd);
+			ps.setString(2, fd);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
 			totalpage=rs.getInt(1);
@@ -161,21 +189,44 @@ public class AdminDAO {
 	
 	
 	
-	public List<ProductVO> ProductListManager(int page)
+	public List<ProductVO> ProductListManager(int page,String fd)
 	{
 		List<ProductVO> plist=new ArrayList<ProductVO>();
 		try
 		{
 			conn=db.getConnection();
 			// 메인페이지 더보기 거기에 랜덤하게 출력해주기
-			String sql="SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count "
-					+ "FROM product_detail WHERE pdno BETWEEN ? AND ?";
-			ps=conn.prepareStatement(sql);
-			int rowSize=20;
-			int startPage=(rowSize*page)-(rowSize-1);
-			int endPage=rowSize*page;
-			ps.setInt(1, startPage);
-			ps.setInt(2, endPage);
+			String sql="";
+			if(fd==null)
+			{
+				sql="SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count "
+						+ "FROM (SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count,rownum as num "
+						+ "FROM (SELECT /*+INDEX_ASC(product_detail PK_PRODUCT_DETAIL)*/pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count "
+						+ "WHERE num BETWEEN ? AND ?";
+				ps=conn.prepareStatement(sql);
+				int rowSize=20;
+				int startPage=(rowSize*page)-(rowSize-1);
+				int endPage=rowSize*page;
+				ps.setInt(1, startPage);
+				ps.setInt(2, endPage);
+			}
+			else
+			{
+				sql= "SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count,num "
+						+ "FROM (SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count,rownum as num "
+						+ "FROM (SELECT /*+INDEX_ASC(product_detail PK_PRODUCT_DETAIL)*/pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count "
+						+ "FROM product_detail WHERE title LIKE '%'||?||'%'))"
+						+ "WHERE num BETWEEN ? AND ?";
+				ps=conn.prepareStatement(sql);
+				int rowSize=20;
+				int startPage=(rowSize*page)-(rowSize-1);
+				int endPage=rowSize*page;
+				ps.setString(1, fd);
+				ps.setInt(2, startPage);
+				ps.setInt(3, endPage);
+
+			}
+			
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
@@ -205,16 +256,18 @@ public class AdminDAO {
 	
 		return plist;
 	}
-	public int adminProductTotalPage()
+	public int adminProductTotalPage(String fd)
 	{
 		int totalpage=0;
 		try
 		{
 			conn=db.getConnection();
 			
-			String sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail";	
+			String sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail WHERE title LIKE '%'||?||'%'";	
 			
 			ps=conn.prepareStatement(sql);
+			ps.setString(1, fd);
+			
 			ResultSet rs=ps.executeQuery();
 			rs.next();
 			totalpage=rs.getInt(1);
@@ -289,6 +342,7 @@ public class AdminDAO {
 	
 	public void product_insert(ProductVO vo)
 	{
+		
 		try
 		{
 			conn=db.getConnection();
@@ -318,7 +372,80 @@ public class AdminDAO {
 		}
 	}
 	
-	
+	public List<ProductVO> adminProductFind (int page,String fd)
+	{
+		List<ProductVO> plist=new ArrayList<ProductVO>();
+		try
+		{
+			conn=db.getConnection();
+//			String sql="SELECT rdno,poster,title,chef,chef_pos,num "
+//					+ "FROM (SELECT rdno,poster,title,chef,chef_pos,rownum as num "
+//					+ "FROM (SELECT /*+INDEX_ASC(recipe_d rd_rdno_pk)*/rdno,poster,title,chef,chef_pos "
+//					+ "FROM recipe_d WHERE title LIKE '%'||?||'%' or chef LIKE '%'||?||'%' )) "
+//					+ "WHERE num BETWEEN ? AND ?";
+			String sql="SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count,num "
+					+ "FROM (SELECT pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count,rownum as num "
+					+ "FROM (SELECT /*+INDEX_ASC(product_detail pd_pdno_pk)*/pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count "
+					+ "FROM product_detail WHERE title LIKE '%'||?||'%')) "
+					+ "WHERE pdno BETWEEN ? AND ?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, fd);
+			int rowSize=20;
+			int startPage=(rowSize*page)-(rowSize-1);
+			int endPage=rowSize*page;
+			ps.setInt(2, startPage);
+			ps.setInt(3, endPage);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				ProductVO vo=new ProductVO();
+				vo.setPdno(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setPoster(rs.getString(3));
+				vo.setSubject(rs.getString(4));
+				vo.setSale(rs.getString(5));
+				vo.setPriced_sale(rs.getString(6));
+				vo.setOriginal_pri(rs.getString(7));
+				vo.setFirst_pri(rs.getString(8));
+				vo.setScore(rs.getDouble(9));
+				vo.setDelivery_pri(rs.getString(10));
+				vo.setGoods_count(rs.getInt(11));
+				plist.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return plist;
+	}
+	public int adminProductFindTotalPage (String fd)
+	{
+		int totalpage=0;
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT CEIL((SELECT COUNT(*) FROM product_detail WHERE title LIKE '%'||?||'%')/12.0) FROM product_detail";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, fd);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			totalpage=rs.getInt(1);
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return totalpage;
+	}
 	
 	
 	
@@ -327,25 +454,44 @@ public class AdminDAO {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public List<FreeBoardVO> boardManagerListData(int page) {
-		List<FreeBoardVO> list = new ArrayList<FreeBoardVO>();
+	public List<FreeBoardVO> boardManagerListData(int page,String fd) {
+List<FreeBoardVO> list = new ArrayList<FreeBoardVO>();
 		
 		try {
 			conn=db.getConnection();
-			String sql = "SELECT bno,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd'),hit,suggest,rownum "
-					+ "FROM (SELECT bno,name,subject,content,regdate,hit,suggest,rownum as num "
-					+ "FROM (SELECT /*+ INDEX_DESC(yori_freeboard yf_bno_pk)*/bno,name,subject,content,regdate,hit,suggest "
-					+ "FROM yori_freeboard)) "
-					+ "WHERE num BETWEEN ? AND ?";
-			ps = conn.prepareStatement(sql);
-			
-			int rowSize = 20;
-			int start = (rowSize*page)-(rowSize-1);
-			int end = rowSize*page;
-			
-			ps.setInt(1, start);
-			ps.setInt(2, end);
-			
+			String sql="";
+			if(fd==null)
+			{
+				sql = "SELECT bno,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd'),hit,suggest,rownum "
+						+ "FROM (SELECT bno,name,subject,content,regdate,hit,suggest,rownum as num "
+						+ "FROM (SELECT /*+ INDEX_DESC(yori_freeboard yf_bno_pk)*/bno,name,subject,content,regdate,hit,suggest "
+						+ "FROM yori_freeboard)) "
+						+ "WHERE num BETWEEN ? AND ?";
+				ps = conn.prepareStatement(sql);
+				int rowSize = 20;
+				int start = (rowSize*page)-(rowSize-1);
+				int end = rowSize*page;
+				ps.setInt(1, start);
+				ps.setInt(2, end);
+			}
+			else
+			{
+				sql = "SELECT bno,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd'),hit,suggest,rownum "
+						+ "FROM (SELECT bno,name,subject,content,regdate,hit,suggest,rownum as num "
+						+ "FROM (SELECT /*+ INDEX_DESC(yori_freeboard yf_bno_pk)*/bno,name,subject,content,regdate,hit,suggest "
+						+ "FROM yori_freeboard WHERE content LIKE '%'||?||'%' or name LIKE '%'||?||'%' or subject LIKE '%'||?||'%')) "
+						+ "WHERE num BETWEEN ? AND ?";
+				ps = conn.prepareStatement(sql);
+				
+				int rowSize = 20;
+				int start = (rowSize*page)-(rowSize-1);
+				int end = rowSize*page;
+				ps.setString(1, fd);
+				ps.setString(2, fd);
+				ps.setString(3, fd);
+				ps.setInt(4, start);
+				ps.setInt(5, end);
+			}
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				FreeBoardVO vo = new FreeBoardVO();
@@ -369,12 +515,15 @@ public class AdminDAO {
 	}
 	
 	//1.1 총페이지
-	public int boardManagerTotalPage() {
+	public int boardManagerTotalPage(String fd) {
 		int total=0;
 		try {
 			conn=db.getConnection();
-			String sql = "SELECT CEIL(COUNT(*)/20.0) FROM yori_freeboard";
+			String sql = "SELECT CEIL(COUNT(*)/20.0) FROM yori_freeboard WHERE content LIKE '%'||?||'%' or name LIKE '%'||?||'%' or subject LIKE '%'||?||'%'";
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, fd);
+			ps.setString(2, fd);
+			ps.setString(3, fd);
 			ResultSet rs = ps.executeQuery();
 			rs.next();
 			total = rs.getInt(1);
@@ -386,6 +535,7 @@ public class AdminDAO {
 		}
 		return total;
 	}
+
 	
 	public void adminBoardUpdate(FreeBoardVO vo)
 	{
