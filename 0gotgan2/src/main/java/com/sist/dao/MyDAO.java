@@ -121,4 +121,28 @@ public class MyDAO {
 			db.disConnection(conn, ps);
 		}
 	}
+	public String mypwd(String id)
+	{
+		String pwd="";
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT pwd FROM project_member WHERE id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			pwd=rs.getString(1);
+			rs.close();
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return pwd;
+	}
 }	

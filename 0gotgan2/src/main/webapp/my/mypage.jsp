@@ -1,41 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--
- 	String mode=request.getParameter("mode");
- 	if(mode==null)
- 		mode="1";
- 	String jsp="";
- 	int index=Integer.parseInt(mode);
- 	switch(index)
- 	{
- 	case 1:
- 		jsp="myinfo.jsp";
- 		break;
- 	case 2:
- 		jsp="response.jsp";
- 		break;
- 	case 3:
- 		jsp="application.jsp";
- 		break;
- 	case 4:
- 		jsp="pageContext.jsp";
- 		break;
- 	case 5:
- 		jsp="out.jsp";
- 		break;
- 	case 6:
- 		jsp="etc.jsp";
- 		break;
- 	case 7:
- 		jsp="session.jsp";
- 		break;
- 	case 8:
- 		jsp="action.jsp";
- 		break;
- 		
- 	}
- --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,9 +56,7 @@
         	  
 	 	 	  <jsp:include page="${jsp}"></jsp:include>
 	 	 	</div>
-	 	 	<div class="row">
-	 	  	<h1>뭔가 비어있어서 써야할거 같으면서도 별로 필요없어서 안써도 될꺼 같은데 뭔가 뭔가인 곳</h1>
-	 	  </div>
+	 	 	
     </section>
 </div>
 </body>

@@ -12,16 +12,9 @@ import com.sist.vo.MemberVO;
 public class MyPageModel {
 	@RequestMapping("my/mypage.do")
 	public String my_page(HttpServletRequest request, HttpServletResponse response) {
-	 	try
-		{
-			request.setCharacterEncoding("UTF-8");
-		}catch(Exception ex) {}
-		HttpSession session=request.getSession();
-		String id=(String)session.getAttribute("id");
-		MyDAO dao=MyDAO.newInstance();
-		MemberVO vo=dao.myInfo(id);
-	 	request.setAttribute("vo", vo);
-		request.setAttribute("main_jsp", "../my/mypage.jsp");
+	 	
+	 	request.setAttribute("main_jsp", "../my/pwdcheck.jsp");
+		
 		 return "../jsp/main.jsp";
 	}
 	@RequestMapping("my/myinfo.do")
@@ -99,4 +92,42 @@ public class MyPageModel {
 		session.invalidate();
 		return "redirect:../jsp/main.do";
 	} // 자동으로 로그아웃까지 돼야하는데 안댐
+	@RequestMapping("my/pwdcheck.do")
+	public String pwd_check(HttpServletRequest request,HttpServletResponse response)
+	{
+		try
+		{
+			request.setCharacterEncoding("UTF-8");
+		}
+		catch(Exception ex) {}
+		String pwd=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		MyDAO dao=MyDAO.newInstance();
+		String dbpwd=dao.mypwd(id);
+		if(pwd.equals(dbpwd))
+		{
+			try
+			{
+				request.setCharacterEncoding("UTF-8");
+			}catch(Exception ex) {}
+			session=request.getSession();
+			
+			dao=MyDAO.newInstance();
+			MemberVO vo=dao.myInfo(id);
+			request.setAttribute("vo", vo);
+			request.setAttribute("jsp", "../my/myinfo.jsp");
+			request.setAttribute("main_jsp", "../my/mypage.jsp");
+			
+			 return "../jsp/main.jsp";
+		}
+		else
+		{
+			request.setAttribute("dbpwd", dbpwd);
+			request.setAttribute("pwd", pwd);
+			request.setAttribute("main_jsp", "../my/pwdcheck.jsp");
+			
+			return "../jsp/main.jsp";
+		}
+	} 
 }
