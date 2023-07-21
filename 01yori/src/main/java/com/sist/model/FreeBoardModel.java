@@ -162,7 +162,7 @@ public class FreeBoardModel {
 		int size=1024*1024*100;
 		//로컬주소 >> 나중에 서버컴의 로컬주소로 바꿔줘야함
 //		 String path="C:\\webDev\\webStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\0gotgan1\\board\\image"; 
-		 String path="C:\\webDev\\webStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\05gotgan\\board\\image";
+		 String path="C:\\webDev\\webStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\01yori\\board\\image";
 		//String path="../ii";
 		String enctype="UTF-8";
 		

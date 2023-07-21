@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(function(){
 	$('#buyBtn').click(function(){
-		let no=$('#buyBtn').attr("data-no")
+		let no=$(this).attr("data-no")
 		$.ajax({
 			type:'post',
 			url:'../cart/cart_buy.do',

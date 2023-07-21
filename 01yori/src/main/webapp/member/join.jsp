@@ -348,8 +348,8 @@ $(function(){
 </script>
 </head>
 <body>
-   <header class="header header-mini"> 
-      <div class="header-title">회원가입</div> 
+   <header class="aa"> 
+      <div class="header-title" style="height:100px;">회원가입</div> 
       <nav aria-label="breadcrumb">
       </nav>
    </header>

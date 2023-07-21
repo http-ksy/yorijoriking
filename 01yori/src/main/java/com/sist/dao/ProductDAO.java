@@ -106,7 +106,7 @@ public class ProductDAO {
 					  		+ "WHERE num BETWEEN ? AND ?";
 			}
 			ps=conn.prepareStatement(sql);
-			int rowSize=20;
+			int rowSize=12;
 			int startPage=(rowSize*page)-(rowSize-1);
 			int endPage=rowSize*page;
 			ps.setInt(1, startPage);
@@ -143,19 +143,19 @@ public class ProductDAO {
 			conn=db.getConnection();
 			if(type==0)
 			{
-			sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail";	
+			sql="SELECT CEIL(COUNT(*)/12.0) FROM product_detail";	
 			}
 			else if(type==1)
 			{
-				sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail WHERE nvl(TO_NUMBER(REPLACE(sale,'%')),0) >=68";	
+				sql="SELECT CEIL(COUNT(*)/12.0) FROM product_detail WHERE nvl(TO_NUMBER(REPLACE(sale,'%')),0) >=68";	
 			}
 			else if(type==2)
 			{
-				sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail  WHERE score=0";
+				sql="SELECT CEIL(COUNT(*)/12.0) FROM product_detail  WHERE score=0";
 			}
 			else if(type==3)
 			{
-				sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail WHERE score>=4.9 ";
+				sql="SELECT CEIL(COUNT(*)/12.0) FROM product_detail WHERE score>=4.9 ";
 			}
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();

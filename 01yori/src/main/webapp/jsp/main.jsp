@@ -145,7 +145,7 @@ font-family: 'Jua', sans-serif;
 <!-- core  -->
     <script src="../assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="../assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2633d4b49e21c9b14bd17316553d25a2&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=622edc30c4f08847855db3770518b259&libraries=services"></script>
     <!-- JoeBLog js -->
     <script src="../assets/js/joeblog.js"></script>
 

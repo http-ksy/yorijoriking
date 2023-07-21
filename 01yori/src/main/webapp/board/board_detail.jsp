@@ -99,12 +99,9 @@
     <div class="row g-5">
         <section class="col-md-3 col-lg-4 order-md-last">
             <aside>
-                <p>Jyc</p>
-                <p><a href="mailto:jyc4648@gmail.com">작성자 이메일 주소</a></p>
-                <p>
-                    <time datetime="2022-01-01T00:00:00">2022-01-01</time>
-                </p>
-                <p>#java</p>
+                <p>요리조리요리킹조리킹</p>
+                <p><a href="https://github.com/http-ksy/yorijoriking">제작자들 깃주소</a></p>                              
+                <img src="../board/image/bb.png"style="width:300px; height:300px;">
             </aside>
         </section>
         <article id="article-content" class="col-md-9 col-lg-8">
@@ -206,8 +203,8 @@
                                    <td class="text-right">
                                      <c:if test="${sessionScope.id!=null }">	<%-- 로그인 되었고 --%>
 			 					      <c:if test="${sessionScope.id == rvo.id }">	<%-- 본인이 썼는지 --%>
-			 			                <span class="btn btn-xs btn-success ups" data-no="${rvo.no }">수정</span>
-			 			                <a href="../board/reply_delete.do?no=${rvo.no}&bno=${vo.bno}" class="btn btn-xs btn-info">삭제</a>
+			 			                <span class="btn btn-xs btn-success ups" data-no="${rvo.no }" style="border-radius:15px;">수정</span>
+			 			                <a href="../board/reply_delete.do?no=${rvo.no}&bno=${vo.bno}" class="btn btn-xs btn-info" style="border-radius:15px;">삭제</a>
 			 			              </c:if>  
 			 			             </c:if> 
                                    </td>
@@ -215,7 +212,12 @@
                                  <tr>
                                   <td>
                                    <pre>${rvo.msg }</pre>
-                                   <span class="text-dark small font-weight-bold ins" data-no="${rvo.no }"><img src="../board/image/reply.png" style="width:20px; height:20px;"></span>
+                                   <c:if test="${rvo.filename!=null }"> 									  	  								  	  
+								  	  <img src="../board/image/${rvo.filename }"  style="width:100px; height:100px; border-radius:15px;"/>
+								  	 </c:if>								                                     
+                                  </td>
+                                  <td>
+                                  <span class="text-dark small font-weight-bold ins" data-no="${rvo.no }"><img src="../board/image/reply.png" style="width:20px; height:20px;"></span>
                                   </td>
                                  </tr>  
                                    
@@ -253,10 +255,10 @@
                         <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">Write Your Comment</a></h6>
                         <hr>
                       <c:if test="${sessionScope.id != null }">
-                       <form method="post" action="../board/reply_insert.do" class="inline">
+                       <form method="post" action="../board/reply_insert.do" class="inline" enctype="multipart/form-data">
 						 <input type=hidden name=bno value="${vo.bno }">
                          <textarea rows="5" cols="60" name="msg" class="form-control" placeholder="댓글을 작성해주세요."></textarea>
-                         <input type="file" name="fileName">                                                
+                         <input type="file" name="upload"  name="fileName">                                                
                          <input type=submit class="btn btn-primary btn-block" value="댓글쓰기">             
                         </form>
                       </c:if>

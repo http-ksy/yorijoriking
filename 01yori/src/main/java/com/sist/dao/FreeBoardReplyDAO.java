@@ -36,7 +36,7 @@ public class FreeBoardReplyDAO {
 		List<FreeBoardReplyVO> list = new ArrayList<FreeBoardReplyVO>();
 		try {
 			conn = db.getConnection();
-			String sql = "SELECT no,bno,id,name,msg,TO_CHAR(regdate,'yyyy-MM-dd HH24:MI:SS'),group_tab "
+			String sql = "SELECT no,bno,id,name,msg,TO_CHAR(regdate,'yyyy-MM-dd HH24:MI:SS'),filename,filesize,group_tab "
 					+ "FROM freeboard_reply "
 					+ "WHERE bno=? "
 					+ "ORDER BY group_id DESC, group_step ASC";
@@ -52,7 +52,9 @@ public class FreeBoardReplyDAO {
 				vo.setName(rs.getString(4)); //세션
 				vo.setMsg(rs.getString(5));
 				vo.setDbday(rs.getString(6));
-				vo.setGroup_tab(rs.getInt(7));
+				vo.setFilename(rs.getString(7));
+				vo.setFilesize(rs.getInt(8));
+				vo.setGroup_tab(rs.getInt(9));
 				
 				list.add(vo);
 			}
@@ -68,8 +70,8 @@ public class FreeBoardReplyDAO {
 	public void replyInsert(FreeBoardReplyVO vo) {
 		try {
 			conn = db.getConnection();
-			String sql = "INSERT INTO freeboard_reply(no,bno,id,name,msg,group_id) "
-					+ "VALUES(fr_no_seq.nextval,?,?,?,?,"
+			String sql = "INSERT INTO freeboard_reply(no,bno,id,name,msg,filename,filesize,group_id) "
+					+ "VALUES(fr_no_seq.nextval,?,?,?,?,?,?,"
 					+ "(SELECT NVL(MAX(group_id)+1,1) FROM freeboard_reply))";
 			        //처음댓글 올릴 때 하나씩 올려줌
 			ps = conn.prepareStatement(sql);
@@ -77,6 +79,8 @@ public class FreeBoardReplyDAO {
 			ps.setString(2, vo.getId());  //session
 			ps.setString(3, vo.getName()); //session
 			ps.setString(4, vo.getMsg());
+			ps.setString(5, vo.getFilename());
+			ps.setInt(6, vo.getFilesize());
 			
 			ps.executeUpdate();
 		} catch (Exception e) {

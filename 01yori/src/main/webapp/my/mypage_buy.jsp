@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2 class="sectiontitle">${sessionScope.name }님의 구매내역 목록</h2>
-	<table class="table">
+	<table class="table" style="width: 1000px;">
 		<tr class="table-success">
 			<th class="text-center">번호</th>
 			<th class="text-center"></th>

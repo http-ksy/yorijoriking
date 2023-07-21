@@ -48,6 +48,7 @@
 				       <td width=35%>
 				        <c:if test="${vo.group_tab == 1 }"> 
 		  	             &nbsp;&nbsp;
+		  	             <img src="../board/image/rep.png" style="width: 30px;height: 30px;">
 		  	            </c:if> 
 				       <a href="../QnA/detail.do?no=${vo.no}">${vo.subject }</a>
 				       </td>

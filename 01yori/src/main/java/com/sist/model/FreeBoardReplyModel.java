@@ -1,11 +1,15 @@
 package com.sist.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -13,13 +17,18 @@ import com.sist.vo.*;
 public class FreeBoardReplyModel {
 
 	@RequestMapping("board/reply_insert.do")
-	public String reply_insert(HttpServletRequest request, HttpServletResponse response) {
+	public String reply_insert(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			
 		} catch (Exception e) {}
-		String bno = request.getParameter("bno");
-		String msg = request.getParameter("msg");
+		
+		int size=1024*1024*100;
+		String path="C:\\webDev\\webStudy\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\01yori\\board\\image";
+		String enctype="UTF-8";
+		MultipartRequest mr = new MultipartRequest(request,path,size,enctype,new DefaultFileRenamePolicy());
+		String bno = mr.getParameter("bno");
+		//String msg = request.getParameter("msg");
 		
 		//세션
 		HttpSession session = request.getSession();
@@ -27,16 +36,26 @@ public class FreeBoardReplyModel {
 		String name = (String)session.getAttribute("name");
 		
 		FreeBoardReplyVO vo = new FreeBoardReplyVO();
-		vo.setBno(Integer.parseInt(bno));		
+		//vo.setBno(Integer.parseInt(bno));		
+		//vo.setBno(mr.getParameter(Integer.parseInt(bno)));
+		vo.setBno(Integer.parseInt(mr.getParameter("bno")));
+		vo.setMsg(mr.getParameter("msg"));
 		vo.setId(id);
 		vo.setName(name);
-		vo.setMsg(msg);
+		
+		//vo.setMsg(msg);
 		
 		
-//		System.out.println(bno);
-//		System.out.println(id);
-//		System.out.println(name);
-//		System.out.println(msg);
+		String filename = mr.getFilesystemName("upload");			
+		  if(filename==null) { //업로드가 안된 상태 			
+			vo.setFilename("");
+			vo.setFilesize(0);				 			 
+		  } else { //업로드가 된 상태 
+			 File file = new File(path+"\\"+filename);
+			// System.out.println(file);
+			 vo.setFilename(filename); 
+			 vo.setFilesize((int)file.length());
+		}
 		
 		//DAO
 		FreeBoardReplyDAO dao = FreeBoardReplyDAO.newInstance();

@@ -267,6 +267,9 @@ $(function(){
 
                     </div>
 					<div class="text-center">
+					<c:if test="${sessionScope.id == null }">
+					<h3>예약을 원하시면 로그인을 해주세요</h3>
+					</c:if>
 					<a class="btn  b1" style="width: 150px" href="javascript:history.back()">목록으로</a>
 					<a  class="btn  b1 rrr" id="reservebtn"  style="width: 150px" data-no="${svo.skdno }">예약하기</a>  
 					<c:if test="${sessionScope.id!=null }">
@@ -281,6 +284,7 @@ $(function(){
 					
 					</c:if>
 					</div>
+					<c:if test="${sessionScope.id != null }">
 					<div class="container" style="display:none" id="sreserve">
     				   <table class="table" height=700>
       						<tr>
@@ -354,6 +358,7 @@ $(function(){
 							</tr>
     					</table>
     				  </div>
+    				  </c:if>
                    <div class="card-footer">
 
               <h6 class="mt-5 mb-3 text-center"><a href="#" class="text-dark">댓글</a></h6>
@@ -465,7 +470,7 @@ $(function(){
 
 
 
-                <h6 class="mt-5 text-center">Related Posts</h6>
+                <!-- <h6 class="mt-5 text-center">Related Posts</h6>
 
                 <hr>
 
@@ -573,7 +578,7 @@ $(function(){
 
                     </div>
 
-                </div>
+                </div> -->
 
             </div>
 

@@ -38,6 +38,7 @@ $(function(){
 		$('#findfrm').submit();
 	}
 })
+})
 </script>
 </head>
 <body>

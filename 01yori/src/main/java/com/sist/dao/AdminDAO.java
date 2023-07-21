@@ -39,7 +39,7 @@ public class AdminDAO {
 					+ "FROM project_member)"
 					+ "WHERE num BETWEEN ? AND ?";
 				ps=conn.prepareStatement(sql);
-				int rowSize=20;
+				int rowSize=10;
 				int startPage=(rowSize*page)-(rowSize-1);
 				int endPage=rowSize*page;
 				ps.setInt(1, startPage);
@@ -52,7 +52,7 @@ public class AdminDAO {
 						+ "FROM project_member WHERE id LIKE '%'||?||'%' or name LIKE '%'||?||'%')"
 						+ "WHERE num BETWEEN ? AND ?";
 				ps=conn.prepareStatement(sql);
-				int rowSize=20;
+				int rowSize=10;
 				int startPage=(rowSize*page)-(rowSize-1);
 				int endPage=rowSize*page;
 				ps.setString(1, fd);
@@ -61,7 +61,7 @@ public class AdminDAO {
 				ps.setInt(4, endPage);
 			}
 			
-//			int rowSize = 20;
+//			int rowSize = 10;
 //			int start = (rowSize*page)-(rowSize-1);
 //			int end = rowSize*page;
 //			
@@ -111,7 +111,7 @@ public class AdminDAO {
 		{
 			conn=db.getConnection();
 			
-			String sql="SELECT CEIL(COUNT(*)/20.0) FROM project_member WHERE id LIKE '%'||?||'%' or name LIKE '%'||?||'%'";	
+			String sql="SELECT CEIL(COUNT(*)/10.0) FROM project_member WHERE id LIKE '%'||?||'%' or name LIKE '%'||?||'%'";	
 			
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, fd);
@@ -206,7 +206,7 @@ public class AdminDAO {
 						+ "FROM (SELECT /*+INDEX_ASC(product_detail PK_PRODUCT_DETAIL)*/pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count "
 						+ "WHERE num BETWEEN ? AND ?";
 				ps=conn.prepareStatement(sql);
-				int rowSize=20;
+				int rowSize=10;
 				int startPage=(rowSize*page)-(rowSize-1);
 				int endPage=rowSize*page;
 				ps.setInt(1, startPage);
@@ -220,7 +220,7 @@ public class AdminDAO {
 						+ "FROM product_detail WHERE title LIKE '%'||?||'%'))"
 						+ "WHERE num BETWEEN ? AND ?";
 				ps=conn.prepareStatement(sql);
-				int rowSize=20;
+				int rowSize=10;
 				int startPage=(rowSize*page)-(rowSize-1);
 				int endPage=rowSize*page;
 				ps.setString(1, fd);
@@ -265,7 +265,7 @@ public class AdminDAO {
 		{
 			conn=db.getConnection();
 			
-			String sql="SELECT CEIL(COUNT(*)/20.0) FROM product_detail WHERE title LIKE '%'||?||'%'";	
+			String sql="SELECT CEIL(COUNT(*)/10.0) FROM product_detail WHERE title LIKE '%'||?||'%'";	
 			
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, fd);
@@ -397,7 +397,7 @@ public class AdminDAO {
 								+ "FROM yori_freeboard)) "
 								+ "WHERE num BETWEEN ? AND ?";
 						ps = conn.prepareStatement(sql);
-						int rowSize = 20;
+						int rowSize = 10;
 						int start = (rowSize*page)-(rowSize-1);
 						int end = rowSize*page;
 						ps.setInt(1, start);
@@ -412,7 +412,7 @@ public class AdminDAO {
 								+ "WHERE num BETWEEN ? AND ?";
 						ps = conn.prepareStatement(sql);
 						
-						int rowSize = 20;
+						int rowSize = 10;
 						int start = (rowSize*page)-(rowSize-1);
 						int end = rowSize*page;
 						ps.setString(1, fd);
@@ -448,7 +448,7 @@ public class AdminDAO {
 		int total=0;
 		try {
 			conn=db.getConnection();
-			String sql = "SELECT CEIL(COUNT(*)/20.0) FROM yori_freeboard WHERE content LIKE '%'||?||'%' or name LIKE '%'||?||'%' or subject LIKE '%'||?||'%'";
+			String sql = "SELECT CEIL(COUNT(*)/10.0) FROM yori_freeboard WHERE content LIKE '%'||?||'%' or name LIKE '%'||?||'%' or subject LIKE '%'||?||'%'";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, fd);
 			ps.setString(2, fd);
