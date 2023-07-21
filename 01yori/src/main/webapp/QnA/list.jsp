@@ -21,7 +21,8 @@
 <body>
       
       <div class="wrapper row3">
-	  <main class="container clear"> 
+	  <main class="container clear">
+	  <div style="height:30px;"></div> 
 		<h2 class="sectiontitle">QnA</h2>
 	   <table class="table">
 	     <tr>
