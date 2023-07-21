@@ -349,7 +349,7 @@ public class AdminDAO {
 		{
 			conn=db.getConnection();
 			String sql="INSERT INTO product_detail(pdno,title,poster,subject,sale,priced_sale,original_pri,first_pri,score,delivery_pri,goods_count) VALUES("
-					+ "(SELECT NVL(MAX(pdno)+1,1) FROM product_detail),?,?,?,?,?,?,?,?,?,?)";
+					+ "(SELECT NVL(MAX(pdno)+1,1) FROM product_detail),?,?,?,?,?,?,?,?,1000원,?)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getTitle());
 			ps.setString(2, vo.getPoster());
@@ -359,8 +359,8 @@ public class AdminDAO {
 			ps.setString(6, vo.getOriginal_pri());
 			ps.setString(7, vo.getFirst_pri());
 			ps.setDouble(8, vo.getScore());
-			ps.setString(9, vo.getDelivery_pri());
-			ps.setInt(10, vo.getGoods_count());
+//			ps.setString(9, vo.getDelivery_pri());
+			ps.setInt(9, vo.getGoods_count());
 			
 			ps.executeUpdate();
 		}

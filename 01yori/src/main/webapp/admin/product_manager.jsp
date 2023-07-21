@@ -93,7 +93,7 @@ $(function(){
 		
 			
 			<td><span class="btn btn-xs btn-danger ups" data-no="${vo.pdno }" style="width: 70px">수정</span></td>
-			<td><a href="product_delete.do?pdno=${vo.pdno }" class="btn btn-xs btn-danger" style="width: 70px">삭제</a></td>
+		
 		</tr>	
 		
 		

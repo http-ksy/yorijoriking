@@ -546,7 +546,7 @@ body .cybr-btn + .cybr-btn {
             <!— Sidebar —>
             <div class="page-sidebar">
                 <div class="ad-card" style="height: 300px">
-               <br><h3 class=" ">최근 본 레시피</h3>
+               <br><h3 class=" ">최근 본 상품</h3>
                    <div>
 <!--                     <span class="btn btn-xs btn-danger" id="cookieDel"><a href="../list/recipeCookieDel.do">전체삭제</a></span> -->
                    <!-- forEach -->

@@ -153,7 +153,7 @@
 		  	 <tr>	  	
 		  	  <th width=20% class="text-center">파일</th>
 		  	  <td colspan="3" height="200"> 	
-		  	  <img src="../board/image/${vo.filename }"  style="width:300px; height:200px; border-radius:15px;"/>
+		  	  <img src="../board/image/${vo.filename }"  style="width:350px; height:350px; border-radius:15px;"/>
 		  	  </td>
 		  	 </tr>
 		  	 </c:if>
