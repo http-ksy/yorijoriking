@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div style="margin-left: 490px"> <!-- 사이즈 보기 -->
-	<h1>상품정보 보기</h1>
+	<h1>상품 추가</h1>
 	</div>
 	<form  method=post action="product_insert_ok.do">
 	<table class="table"> <!-- 사이즈 보기 -->
