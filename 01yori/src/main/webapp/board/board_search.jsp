@@ -33,14 +33,29 @@ $(function() {
 </script>
 </head>
 <body>
-<div>
-<ul class="a">
-  <li><a class="ll" href="../board/list.do?cno=0">전체</a></li>
-  <li><a class="ll" href="../board/list.do?cno=1">자유</a></li>
-  <li><a class="ll" href="../board/list.do?cno=3">레시피</a></li>
-  <li><a class="ll" href="../board/list.do?cno=4">스토어</a></li>
-  <li><a class="ll" href="../board/list.do?cno=5">공유주방</a></li>
-</ul>
+   <div style="display: flex;">
+    <aside class="aside-ads" style="background-color: red; position: fixed; display: flex;">
+         <div class="" style="background-color: #e6fbf6; margin-top: 100px; height: 410px; position: fixed; width: 200px;">
+            <div class="container">
+	 	<div class="text-center"><br>
+	 		<h1>메뉴판</h1>
+	 	</div>
+	 	 <div class="navbar-nav">
+	 	 	<div class="nav-item">
+	 	 	  <div style="height: 30px"></div>
+	 	 	  <table class="table" >
+	 	 	    <tr><td><a class="ll" href="../board/list.do?cno=0">전체</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=1">자유</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=3">레시피</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=4">스토어</a></td></tr>
+  <tr><td><a class="ll" href="../board/list.do?cno=5">공유주방</a></td></tr>
+	 	 	  </table>
+	 	 	</div>
+	 	 </div>
+	 	  
+	</div>
+        </div>
+    </aside>
 </div>
 
     <div class="wrapper row3">
