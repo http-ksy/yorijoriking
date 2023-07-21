@@ -37,6 +37,7 @@
 <body>
 	<div class="wrapper row3">
 	  <main class="container clear"> 
+	  <div style="height:30px;"></div>
 	  	<h2 class="sectiontitle">글쓰기</h2>
 	  	<div class="row">
 	  	<form method=post action="../board/board_insert_ok.do" name=frm enctype="multipart/form-data">

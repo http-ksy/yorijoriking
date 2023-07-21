@@ -103,6 +103,33 @@ public class MemberDAO {
 		return count;
 				
 	}
+	public int memberEmailCheck(String email)
+	{
+		int count=0;
+		if(email.equals("")) {
+			return 2;
+		}
+		try
+		{
+			conn=db.getConnection();
+			String sql="SELECT COUNT(*) FROM project_member WHERE email=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, email);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			count=rs.getInt(1);
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			db.disConnection(conn, ps);
+		}
+		return count;
+				
+	}
 	public int postFindCount(String dong)
 	{
 		int count=0;

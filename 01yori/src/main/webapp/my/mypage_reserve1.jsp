@@ -48,7 +48,7 @@ let i=0;
      </ul>
   </div>
 <section>
-<div class="container1" style="width: 1100px">
+<div class="container1" style="width: 1150px">
       <h2>${sessionScope.name }님의 예약 목록</h2>
     <c:forEach var="vo" items="${list }">
     <!--single booking details-->

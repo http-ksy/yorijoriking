@@ -55,6 +55,18 @@ public void phonecheck_ok(HttpServletRequest request, HttpServletResponse respon
 		out.println(count); // ajax result에 보낸다 
 	}catch(Exception ex) {}
 }
+@RequestMapping("member/emailcheck_ok.do")
+public void emailcheck_ok(HttpServletRequest request, HttpServletResponse response)
+{
+	String email=request.getParameter("email");
+	MemberDAO dao=MemberDAO.newInstance();
+	int count=dao.memberEmailCheck(email);
+	try
+	{
+		PrintWriter out=response.getWriter(); //메모리에 저장
+		out.println(count); // ajax result에 보낸다 
+	}catch(Exception ex) {}
+}
 @RequestMapping("member/postfind.do")
 public String memberPostFind(HttpServletRequest request,HttpServletResponse response)
 {

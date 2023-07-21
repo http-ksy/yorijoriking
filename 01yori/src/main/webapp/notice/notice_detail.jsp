@@ -35,7 +35,7 @@
 	  	 </tr>
 	  	 <tr>
 	  	  <td colspan="4" class="text-right">
-	  	   <a href="../notice/notice_list.do" class="btn btn-xs btn-warning">목록</a>
+	  	   <a href="../notice/notice_list.do" class="btn btn-xs btn-warning" style="border-radius:15px;">목록</a>
 	  	  </td>
 	  	 </tr>
 	  	 </table>

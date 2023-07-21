@@ -45,10 +45,10 @@
 	    <tr>
 	     <td colspan="4" class="text-right">
 	     <c:if test="${sessionScope.id == vo.id }">
-	      <a href="../QnA/update.do?no=${vo.no}" class="btn btn-xs btn-success">수정</a>
-	      <a href="../QnA/delete.do?no=${vo.no }" class="btn btn-xs btn-info">삭제</a>
+	      <a href="../QnA/update.do?no=${vo.no}" class="btn btn-xs btn-success" style="border-radius:15px;">수정</a>
+	      <a href="../QnA/delete.do?no=${vo.no }" class="btn btn-xs btn-info" style="border-radius:15px;">삭제</a>
 	     </c:if> 
-	      <a href="../QnA/list.do" class="btn btn-xs btn-warning">목록</a>
+	      <a href="../QnA/list.do" class="btn btn-xs btn-warning" style="border-radius:15px;">목록</a>
 	     </td>
 	    </tr>
 	   </table>

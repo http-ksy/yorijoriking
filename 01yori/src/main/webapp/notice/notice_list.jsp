@@ -13,6 +13,7 @@
 <body>
 	<div class="wrapper row3">
 	  <main class="container clear"> 
+	  <div style="height:30px;"></div>	
 		<h2 class="sectiontitle">공지사항</h2>
 		
 			<table class="table table-hover" id="article-table">

@@ -114,6 +114,21 @@ $(function(){
         $('#amount').val(amount);
         $('#buyBtn').attr('data-price', total);
         $('#cartFrm').show();
+        $('#cartFrm').click(function(){
+			let pdno = $(this).attr('data-no')
+			console.log(amount)
+			console.log(price)
+			console.log(pdno)
+			console.log(total)
+			$.ajax({
+				type:'post',
+				url:'../cart/cart_insert.do',
+				data:{'amount':amount,'price':price,'pdsno':pdno},
+				success:function(result){
+					alert("장바구니 완료")
+				}
+			})
+		})
     })
 })
 var IMP = window.IMP; // 생략 가능
@@ -451,12 +466,13 @@ body .cybr-btn + .cybr-btn {
 <%--           </c:if> --%>
 			<c:if test="${sessionScope.id!=null }">
 			
-			  <form method="post" action="../cart/cart_insert.do" style="display:none" id="cartFrm">
+			 <%--  <form method="post" action="../cart/cart_insert.do" style="display:none" id="cartFrm">
 	           <input type="hidden" name="pdsno" value="${pvo.pdno }">
 	           <input type="hidden" name="price" id="price">
 	           <input type="hidden" name="amount" id="amount">
 	           <input type=submit class="btn btn-xs b1 inline" value="장바구니" style="width: 150px">
-	          </form>
+	          </form> --%>
+	          <input type="button" class="btn btn-xs b1" value="장바구니" style="width: 150px" id="cartFrm" data-no="${pdno }">
 	          <input type=button class="btn btn-xs b1" value="바로구매" style="width: 150px" data-price="${price }" id="buyBtn">
 				<c:if test="${no==0 }">
 					 <button class=" btn btn-xs b1" id="jjim"  data-no="${pdno }" data-type="3" data-num="${no }">찜하기</button>

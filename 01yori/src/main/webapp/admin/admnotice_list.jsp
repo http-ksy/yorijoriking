@@ -49,8 +49,8 @@
 				       <td width=10% class="text-center">${vo.dbday }</td> 
 				       <td width=10% class="text-center">${vo.hit }</td>  
 				       <td class="inline">
-				         <a href="../admin/notice_update.do?no=${vo.no }" class="btn btn-xs btn-warning">수정</a>
-				         <a href="../admin/notice_delete.do?no=${vo.no }" class="btn btn-xs btn-info">삭제</a>
+				         <a href="../admin/notice_update.do?no=${vo.no }" class="btn btn-xs" style="background-color: #0B4C5F; border-radius:15px; color:white">수정</a>
+				         <a href="../admin/notice_delete.do?no=${vo.no }" class="btn btn-xs btn-warning"  style="border-radius:15px;">삭제</a>
 				       </td>  
 				    </tr>
 				</c:forEach>
